@@ -10,7 +10,7 @@ const parseExcelFile = async (file) => {
       const workbook = XLSX.read(data, { type: 'array' });
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
-      const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+      const jsonData = XLSX.utils.sheet_to_json(sheet);
       resolve(jsonData);
     };
     reader.readAsArrayBuffer(file);

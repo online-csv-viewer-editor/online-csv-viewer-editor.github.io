@@ -10,14 +10,20 @@ import parseExcelFile from './ExcelParser';
 
 // Match Data
 // 1. load from selected column. count generate unique
+
+  // 1-1. first base column
+  // extract to match
+  // find unique
+
 // => check
 
-const ExcelBase = () => {
+const ExcelBase = ( { setMatchData } ) => {
   const [baseData, setBaseData] = useState([]);
 
   const handleFileChange = async (file) => {
-    const parsedData = await parseExcelFile(file);
-    setBaseData(parsedData);
+    await parseExcelFile(file).then((parsedData) => {
+      setBaseData(parsedData);
+    });
   };
 
   return (
@@ -28,16 +34,28 @@ const ExcelBase = () => {
   );
 };
 
-const ExcelMatch = () => {
-  const handleFileChange = async (file) => {
-    const parsedData = await parseExcelFile(file);
-    setExcelData(parsedData);
-  };
+const ExcelMatch = ( {matchData, setMatchData} ) => {
+//  const handleFileChange = async (file) => {
+//    const parsedData = await parseExcelFile(file);
+//    setExcelData(parsedData);
+//  };
 
   return (
     <div>
-      <FileInput onFileChange={handleFileChange} />
-      <ExcelGrid rowData={excelData} />
+      <ExcelGrid rowData={matchData} />
+    </div>
+  );
+};
+
+const ExcelResult = ( {resultData, setResultData} ) => {
+//  const handleFileChange = async (file) => {
+//    const parsedData = await parseExcelFile(file);
+//    setExcelData(parsedData);
+//  };
+
+  return (
+    <div>
+      <ExcelGrid rowData={resultData} />
     </div>
   );
 };
@@ -50,15 +68,15 @@ const SplitScreen = () => {
     <Grid container>
       <Grid item xs={6}>
         <Grid container direction="column">
-          <ExcelBase />
+          <ExcelBase setMatchData={setMatchData} />
         </Grid>
       </Grid>
       <Grid item xs={6}>
         <Grid container direction="column">
-          <ExcelMatch />
+          <ExcelMatch matchData={matchData} />
         </Grid>
         <Grid container direction="column">
-          <ExcelResult />
+          <ExcelResult resultData={resultData} />
         </Grid>
       </Grid>
     </Grid>

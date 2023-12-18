@@ -9,18 +9,22 @@ const ExcelGrid = ({ rowData }) => {
         if (rowData.length === 0) {
             return [];
         }
-        const values = Object.values(rowData[0]);
-        return values.map((value) => ({
-            field: value,
+        const keys = Object.keys(rowData[0]);
+        return keys.map((key) => ({
+            field: key,
         }));
     };
     const columnDefs = getColumnDefs();
+    const paginationPageSize = 20;
 
   return (
     <div className="ag-theme-alpine" style={{ height: 400, width: '100%' }}>
       <AgGridReact
         columnDefs={columnDefs}
         rowData={rowData}
+        pagination={true}
+        paginationPageSize={paginationPageSize}
+        domLayout='autoHeight'
       />
     </div>
   );
