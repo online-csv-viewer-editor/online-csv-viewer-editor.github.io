@@ -1,6 +1,6 @@
 
 // ExcelGrid.js
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
@@ -33,16 +33,16 @@ export const BaseGrid = ({ rowData, setMatchData }) => {
   const onFirstDataRendered = useCallback((params) => {
     const firstColumn = params.api.getAllGridColumns()[0];
     if (firstColumn) {
+      const columnKey = firstColumn.getColId();
       const uniqueValuesSet = new Set();
       params.api.forEachNode((rowNode) => {
-        uniqueValuesSet.add(rowNode.data[firstColumn.getColId()]);
+        uniqueValuesSet.add(rowNode.data[columnKey]);
       });
       const uniqueValuesArray = Array.from(uniqueValuesSet);
-      const uniqueColumnData = {
-        headerName: firstColumn.getColDef().field,
-        values: uniqueValuesArray,
-      };
-      console.log(uniqueColumnData);
+      const uniqueValuesJsonList = uniqueValuesArray.map((value) => ({
+        [columnKey]: value,
+      }));
+      setMatchData(uniqueValuesJsonList);
     }
   }, []);
 
