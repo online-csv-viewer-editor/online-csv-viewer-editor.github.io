@@ -19,26 +19,29 @@ export const BaseGrid = ({ rowData, setMatchData }) => {
   const paginationPageSize = 20;
 
   // extract values and setMatchData
-  const onColumnMoved = useCallback((params) => {
-    console.log("onColumnMoved. params: ", params)
-    if (params.finished === true) {
-      if (params.toIndex === 0) {
-        const firstColumn = params.api.getAllGridColumns()[0];
-        if (firstColumn) {
-          const columnKey = firstColumn.getColId();
-          const uniqueValuesSet = new Set();
-          params.api.forEachNode((rowNode) => {
-            uniqueValuesSet.add(rowNode.data[columnKey]);
-          });
-          const uniqueValuesArray = Array.from(uniqueValuesSet);
-          const uniqueValuesJsonList = uniqueValuesArray.map((value) => ({
-            [columnKey]: value,
-          }));
-          setMatchData(uniqueValuesJsonList);
-        }
-      }
-    }
-  }, []);
+//  const onColumnMoved = useCallback((params) => {
+//    console.log("onColumnMoved. params: ", params)
+//    if (params.finished === true) {
+//      if (params.toIndex === 0) {
+//        const firstColumn = params.api.getAllGridColumns()[0];
+//        if (firstColumn) {
+//          const columnKey = firstColumn.getColId();
+//          const uniqueValuesSet = new Set();
+//          params.api.forEachNode((rowNode) => {
+//            uniqueValuesSet.add(rowNode.data[columnKey]);
+//          });
+//          const uniqueValuesArray = Array.from(uniqueValuesSet);
+//          const uniqueValuesJsonList = uniqueValuesArray.map((value) => ({
+//            [columnKey]: value,
+//          }));
+//          setMatchData(uniqueValuesJsonList);
+//        }
+//      }
+//      const newColumnDefs = params.api.getColumnState();
+//      console.log(params.api.getColumnState());
+//      params.api.setGridOption('columnDefs', newColumnDefs);
+//    }
+//  }, [setMatchData]);
 
   const onFirstDataRendered = useCallback((params) => {
     const firstColumn = params.api.getAllGridColumns()[0];
@@ -54,7 +57,7 @@ export const BaseGrid = ({ rowData, setMatchData }) => {
       }));
       setMatchData(uniqueValuesJsonList);
     }
-  }, []);
+  }, [setMatchData]);
 
   return (
     <div className="ag-theme-alpine" style={{ height: 400, width: '100%' }}>
@@ -64,7 +67,7 @@ export const BaseGrid = ({ rowData, setMatchData }) => {
         pagination={true}
         paginationPageSize={paginationPageSize}
         domLayout='autoHeight'
-        onColumnMoved={onColumnMoved}
+//        onColumnMoved={onColumnMoved}
         onFirstDataRendered={onFirstDataRendered}
       />
     </div>

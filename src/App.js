@@ -3,7 +3,7 @@ import './App.css';
 
 // App.js
 import React, { useState } from 'react';
-import { Grid } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import FileInput from './FileInput';
 import { BaseGrid, MatchGrid, ResultGrid } from './ExcelGrid';
 import parseExcelFile from './ExcelParser';
@@ -20,6 +20,8 @@ import parseExcelFile from './ExcelParser';
   // 1-2. data to match first column
 
   // => check
+
+  // 1-3. copy data to result first column
 
 const ExcelBase = ( { setMatchData } ) => {
   const [baseData, setBaseData] = useState([]);
@@ -43,9 +45,15 @@ const ExcelMatch = ( {matchData, setMatchData} ) => {
 //    const parsedData = await parseExcelFile(file);
 //    setExcelData(parsedData);
 //  };
+  const handleFileChange = async (file) => {
+    await parseExcelFile(file).then((parsedData) => {
+      setMatchData(parsedData);
+    });
+  };
 
   return (
     <div>
+      <FileInput onFileChange={handleFileChange} />
       <MatchGrid rowData={matchData} />
     </div>
   );
@@ -72,15 +80,19 @@ const SplitScreen = () => {
     <Grid container>
       <Grid item xs={6}>
         <Grid container direction="column">
-          <ExcelBase setMatchData={setMatchData} />
+          <Grid item xs>
+            <ExcelBase setMatchData={setMatchData} />
+          </Grid>
         </Grid>
       </Grid>
       <Grid item xs={6}>
         <Grid container direction="column">
-          <ExcelMatch matchData={matchData} />
-        </Grid>
-        <Grid container direction="column">
-          <ExcelResult resultData={resultData} />
+          <Grid item xs>
+            <ExcelMatch matchData={matchData} />
+          </Grid>
+          <Grid item xs>
+            <ExcelResult resultData={resultData} />
+          </Grid>
         </Grid>
       </Grid>
     </Grid>
