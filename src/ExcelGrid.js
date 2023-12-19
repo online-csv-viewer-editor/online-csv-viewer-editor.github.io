@@ -22,11 +22,21 @@ export const BaseGrid = ({ rowData, setMatchData }) => {
   const onColumnMoved = useCallback((params) => {
     console.log("onColumnMoved. params: ", params)
     if (params.finished === true) {
-      console.log("finished === true")
       if (params.toIndex === 0) {
-        console.log("toIndex === 0"); 
+        const firstColumn = params.api.getAllGridColumns()[0];
+        if (firstColumn) {
+          const columnKey = firstColumn.getColId();
+          const uniqueValuesSet = new Set();
+          params.api.forEachNode((rowNode) => {
+            uniqueValuesSet.add(rowNode.data[columnKey]);
+          });
+          const uniqueValuesArray = Array.from(uniqueValuesSet);
+          const uniqueValuesJsonList = uniqueValuesArray.map((value) => ({
+            [columnKey]: value,
+          }));
+          setMatchData(uniqueValuesJsonList);
+        }
       }
-
     }
   }, []);
 
