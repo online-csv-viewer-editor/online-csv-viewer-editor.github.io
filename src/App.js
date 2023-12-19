@@ -5,7 +5,7 @@ import './App.css';
 import React, { useState } from 'react';
 import { Grid } from '@mui/material';
 import FileInput from './FileInput';
-import ExcelGrid from './ExcelGrid';
+import { BaseGrid, MatchGrid, ResultGrid } from './ExcelGrid';
 import parseExcelFile from './ExcelParser';
 
 // Match Data
@@ -16,6 +16,10 @@ import parseExcelFile from './ExcelParser';
   // find unique
 
 // => check
+
+  // 1-2. data to match first column
+
+  // => check
 
 const ExcelBase = ( { setMatchData } ) => {
   const [baseData, setBaseData] = useState([]);
@@ -29,7 +33,7 @@ const ExcelBase = ( { setMatchData } ) => {
   return (
     <div>
       <FileInput onFileChange={handleFileChange} />
-      <ExcelGrid rowData={baseData} />
+      <BaseGrid rowData={baseData} setMatchData={setMatchData} />
     </div>
   );
 };
@@ -42,7 +46,7 @@ const ExcelMatch = ( {matchData, setMatchData} ) => {
 
   return (
     <div>
-      <ExcelGrid rowData={matchData} />
+      <MatchGrid rowData={matchData} />
     </div>
   );
 };
@@ -55,7 +59,7 @@ const ExcelResult = ( {resultData, setResultData} ) => {
 
   return (
     <div>
-      <ExcelGrid rowData={resultData} />
+      <ResultGrid rowData={resultData} />
     </div>
   );
 };
