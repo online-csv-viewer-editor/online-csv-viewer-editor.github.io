@@ -85,7 +85,7 @@ export const MatchGrid = ({ rowData }) => {
       const keys = Object.keys(rowData[0]);
       return keys.map((key) => ({
           field: key,
-          editableColumn: true,
+          editable: true,
       }));
   };
   const columnDefs = getColumnDefs();

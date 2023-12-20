@@ -30,6 +30,8 @@ import parseExcelFile from './ExcelParser';
 
   // => check
 
+  // 1-5.
+
 const ExcelBase = ( { setMatchData, baseData, setBaseData } ) => {
   const handleFileChange = async (file) => {
     await parseExcelFile(file).then((parsedData) => {
