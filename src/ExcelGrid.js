@@ -54,49 +54,55 @@ export const BaseGrid = ({ rowData, setMatchData }) => {
       const uniqueValuesArray = Array.from(uniqueValuesSet);
       const uniqueValuesJsonList = uniqueValuesArray.map((value) => ({
         [columnKey]: value,
+        ["editableColumn"]: "property for " + value
       }));
       setMatchData(uniqueValuesJsonList);
     }
   }, [setMatchData]);
 
   return (
-    <div className="ag-theme-alpine" style={{ height: 400, width: '100%' }}>
-      <AgGridReact
-        columnDefs={columnDefs}
-        rowData={rowData}
-        pagination={true}
-        paginationPageSize={paginationPageSize}
-        domLayout='autoHeight'
-//        onColumnMoved={onColumnMoved}
-        onFirstDataRendered={onFirstDataRendered}
-      />
-    </div>
+    <>
+      <div className="ag-theme-alpine" style={{ height: 400, width: '100%' }}>
+        <AgGridReact
+          columnDefs={columnDefs}
+          rowData={rowData}
+          pagination={true}
+          paginationPageSize={paginationPageSize}
+          domLayout='autoHeight'
+  //        onColumnMoved={onColumnMoved}
+          onFirstDataRendered={onFirstDataRendered}
+        />
+      </div>
+    </>
   );
 };
 
 export const MatchGrid = ({ rowData }) => {
-    const getColumnDefs = () => {
-        if (rowData.length === 0) {
-            return [];
-        }
-        const keys = Object.keys(rowData[0]);
-        return keys.map((key) => ({
-            field: key,
-        }));
-    };
-    const columnDefs = getColumnDefs();
-    const paginationPageSize = 20;
+  const getColumnDefs = () => {
+      if (rowData.length === 0) {
+          return [];
+      }
+      const keys = Object.keys(rowData[0]);
+      return keys.map((key) => ({
+          field: key,
+          editableColumn: true,
+      }));
+  };
+  const columnDefs = getColumnDefs();
+  const paginationPageSize = 20;
 
   return (
-    <div className="ag-theme-alpine" style={{ height: 400, width: '100%' }}>
-      <AgGridReact
-        columnDefs={columnDefs}
-        rowData={rowData}
-        pagination={true}
-        paginationPageSize={paginationPageSize}
-        domLayout='autoHeight'
-      />
-    </div>
+    <>
+      <div className="ag-theme-alpine" style={{ height: 400, width: '100%' }}>
+        <AgGridReact
+          columnDefs={columnDefs}
+          rowData={rowData}
+          pagination={true}
+          paginationPageSize={paginationPageSize}
+          domLayout='autoHeight'
+        />
+      </div>
+    </>
   );
 };
 

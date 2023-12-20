@@ -21,7 +21,13 @@ import parseExcelFile from './ExcelParser';
 
   // => check
 
-  // 1-3. copy data to result first column
+  // 1-3. edit match 2nd column
+
+  // => check
+
+  // 1-4. copy data to result first column
+
+  // => check
 
 const ExcelBase = ( { setMatchData } ) => {
   const [baseData, setBaseData] = useState([]);
