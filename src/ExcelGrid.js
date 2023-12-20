@@ -1,12 +1,13 @@
 
 // ExcelGrid.js
-//import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 import parseExcelFile from './ExcelParser';
 import FileInput from './FileInput';
+import './ExcelGrid.css';
 
 export const ExcelBase = ( { setMatchData, baseData, setBaseData } ) => {
   const handleFileChange = async (file) => {
@@ -24,6 +25,14 @@ export const ExcelBase = ( { setMatchData, baseData, setBaseData } ) => {
 };
 
 export const BaseGrid = ({ rowData, setMatchData }) => {
+
+  const [selectedColId, setSelectedColId ] = useState("");
+
+  const highlightSelectedColumn = (params) => {
+    console.log(params)
+    return params.colDef.colId === selectedColId ? 'highlighted-column' : '';
+  };
+
   const getColumnDefs = () => {
       if (rowData.length === 0) {
           return [];
@@ -31,6 +40,7 @@ export const BaseGrid = ({ rowData, setMatchData }) => {
       const keys = Object.keys(rowData[0]);
       return keys.map((key) => ({
           field: key,
+          cellClass: {highlightSelectedColumn}
       }));
   };
   const columnDefs = getColumnDefs();
@@ -61,23 +71,29 @@ export const BaseGrid = ({ rowData, setMatchData }) => {
 //    }
 //  }, [setMatchData]);
 
-//  const onFirstDataRendered = useCallback((params) => {
-//    const firstColumn = params.api.getAllGridColumns()[0];
-//    if (firstColumn) {
-//      const columnKey = firstColumn.getColId();
-//      const uniqueValuesSet = new Set();
-//      params.api.forEachNode((rowNode) => {
-//        uniqueValuesSet.add(rowNode.data[columnKey]);
+//  const onfirstdatarendered = usecallback((params) => {
+//    const firstcolumn = params.api.getallgridcolumns()[0];
+//    if (firstcolumn) {
+//      const columnkey = firstcolumn.getcolid();
+//      const uniquevaluesset = new set();
+//      params.api.foreachnode((rownode) => {
+//        uniquevaluesset.add(rownode.data[columnkey]);
 //      });
-//      const uniqueValuesArray = Array.from(uniqueValuesSet);
-//      const uniqueValuesJsonList = uniqueValuesArray.map((value) => ({
-//        [columnKey]: value,
-//        "editableColumn": "matching property for " + value
+//      const uniquevaluesarray = array.from(uniquevaluesset);
+//      const uniquevaluesjsonlist = uniquevaluesarray.map((value) => ({
+//        [columnkey]: value,
+//        "editablecolumn": "matching property for " + value
 //      }));
-//      setMatchData(uniqueValuesJsonList);
-//      console.log(uniqueValuesJsonList);
+//      setmatchdata(uniquevaluesjsonlist);
+//      console.log(uniquevaluesjsonlist);
 //    }
-//  }, [setMatchData]);
+//  }, [setmatchdata]);
+
+  const handleCellClicked = useCallback((params) => {
+    console.log("handleCellClicked");
+    const colId = params.column.colId;
+    setSelectedColId(colId);
+  }, []);
 
   return (
     <>
@@ -88,6 +104,7 @@ export const BaseGrid = ({ rowData, setMatchData }) => {
           pagination={true}
           paginationPageSize={paginationPageSize}
           domLayout='autoHeight'
+          onCellClicked={handleCellClicked}
   //        onColumnMoved={onColumnMoved}
  //         onFirstDataRendered={onFirstDataRendered}
         />
