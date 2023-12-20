@@ -3,9 +3,10 @@ import './App.css';
 
 // App.js
 import React, { useState } from 'react';
-import { Grid, Box } from '@mui/material';
+import { Grid } from '@mui/material';
 import FileInput from './FileInput';
 import { BaseGrid, MatchGrid, ResultGrid } from './ExcelGrid';
+import { VlookupButton } from './VlookupButton';
 import parseExcelFile from './ExcelParser';
 
 // Match Data
@@ -29,9 +30,7 @@ import parseExcelFile from './ExcelParser';
 
   // => check
 
-const ExcelBase = ( { setMatchData } ) => {
-  const [baseData, setBaseData] = useState([]);
-
+const ExcelBase = ( { setMatchData, baseData, setBaseData } ) => {
   const handleFileChange = async (file) => {
     await parseExcelFile(file).then((parsedData) => {
       setBaseData(parsedData);
@@ -46,7 +45,7 @@ const ExcelBase = ( { setMatchData } ) => {
   );
 };
 
-const ExcelMatch = ( {matchData, setMatchData} ) => {
+const ExcelMatch = ( {matchData, setMatchData, setResultData} ) => {
 //  const handleFileChange = async (file) => {
 //    const parsedData = await parseExcelFile(file);
 //    setExcelData(parsedData);
@@ -60,12 +59,12 @@ const ExcelMatch = ( {matchData, setMatchData} ) => {
   return (
     <div>
       <FileInput onFileChange={handleFileChange} />
-      <MatchGrid rowData={matchData} />
+      <MatchGrid rowData={matchData} setResultData={setResultData} />
     </div>
   );
 };
 
-const ExcelResult = ( {resultData, setResultData} ) => {
+const ExcelResult = ( {resultData} ) => {
 //  const handleFileChange = async (file) => {
 //    const parsedData = await parseExcelFile(file);
 //    setExcelData(parsedData);
@@ -79,6 +78,7 @@ const ExcelResult = ( {resultData, setResultData} ) => {
 };
 
 const SplitScreen = () => {
+  const [baseData, setBaseData] = useState([]);
   const [matchData, setMatchData] = useState([]);
   const [resultData, setResultData] = useState([]);
 
@@ -87,18 +87,18 @@ const SplitScreen = () => {
       <Grid item xs={6}>
         <Grid container direction="column">
           <Grid item xs>
-            <ExcelBase setMatchData={setMatchData} />
+            { resultData.length === 0 ? (
+              <ExcelBase baseData={baseData} setBaseData={setBaseData} setMatchData={setMatchData} />
+            ) : (
+              <ExcelResult resultData={resultData} />
+            )}
           </Grid>
         </Grid>
       </Grid>
       <Grid item xs={6}>
         <Grid container direction="column">
-          <Grid item xs>
-            <ExcelMatch matchData={matchData} />
-          </Grid>
-          <Grid item xs>
-            <ExcelResult resultData={resultData} />
-          </Grid>
+          <ExcelMatch matchData={matchData} />
+          <VlookupButton baseData={baseData} matchData={matchData} setResultData={setResultData} />
         </Grid>
       </Grid>
     </Grid>

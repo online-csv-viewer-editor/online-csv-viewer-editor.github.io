@@ -54,7 +54,7 @@ export const BaseGrid = ({ rowData, setMatchData }) => {
       const uniqueValuesArray = Array.from(uniqueValuesSet);
       const uniqueValuesJsonList = uniqueValuesArray.map((value) => ({
         [columnKey]: value,
-        ["editableColumn"]: "property for " + value
+        "editableColumn": "matching property for " + value
       }));
       setMatchData(uniqueValuesJsonList);
     }
