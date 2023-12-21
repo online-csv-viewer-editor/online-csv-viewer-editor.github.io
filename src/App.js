@@ -50,10 +50,23 @@ const SplitScreen = () => {
   const [selectedColIdBase, setSelectedColIdBase ] = useState("");
   const [selectedColIdMatch, setSelectedColIdMatch ] = useState("");
 
+  const stateVariables = {
+    baseData,
+    setBaseData,
+    matchData,
+    setMatchData,
+    resultData,
+    setResultData,
+    selectedColIdBase,
+    setSelectedColIdBase,
+    selectedColIdMatch,
+    setSelectedColIdMatch
+  };
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={6}>
-        <BaseGrid baseData={baseData} setBaseData={setBaseData} setMatchData={setMatchData} selectedColIdBase={selectedColIdBase} setSelectedColIdBase={setSelectedColIdBase} />
+        <BaseGrid state={stateVariables} />
       </Grid>
       <Grid item xs={6}>
         <MatchGrid matchData={matchData} setMatchData={setMatchData} selectedColIdMatch={selectedColIdMatch} setSelectedColIdMatch={setSelectedColIdMatch} />

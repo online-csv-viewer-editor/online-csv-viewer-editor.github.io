@@ -9,7 +9,8 @@ import parseExcelFile from './ExcelParser';
 import FileInput from './FileInput';
 import './ExcelGrid.css';
 
-export const BaseGrid = ({ baseData, setBaseData, setMatchData, selectedColIdBase, setSelectedColIdBase }) => {
+export const BaseGrid = ({ state }) => {
+  const { baseData, setBaseData, setMatchData, selectedColIdBase, setSelectedColIdBase } = state;
 
   const handleFileChange = async (file) => {
     await parseExcelFile(file).then((parsedData) => {
