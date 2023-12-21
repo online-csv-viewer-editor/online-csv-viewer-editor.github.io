@@ -4,7 +4,7 @@ import './App.css';
 // App.js
 import React, { useState } from 'react';
 import { Grid } from '@mui/material';
-import { ExcelBase, ExcelMatch, ExcelResult } from './ExcelGrid';
+import { BaseGrid, MatchGrid, ResultGrid } from './ExcelGrid';
 import { VlookupButton } from './VlookupButton';
 
 // Match Data
@@ -33,31 +33,36 @@ import { VlookupButton } from './VlookupButton';
   // 1-6-1. select key column in base and highlight
   // => check
 
+  // 1-6-2. select key column in match and highlight
+  // => check
+
   // 1-7. look for match on the selected column
+  // => check
+
+  // 1-8. 
+  // =>
 
 const SplitScreen = () => {
   const [baseData, setBaseData] = useState([]);
   const [matchData, setMatchData] = useState([]);
   const [resultData, setResultData] = useState([]);
 
+  const [selectedColIdBase, setSelectedColIdBase ] = useState("");
+  const [selectedColIdMatch, setSelectedColIdMatch ] = useState("");
+
   return (
-    <Grid container>
+    <Grid container spacing={2}>
       <Grid item xs={6}>
-        <Grid container direction="column">
-          <Grid item xs>
-            { resultData.length === 0 ? (
-              <ExcelBase baseData={baseData} setBaseData={setBaseData} setMatchData={setMatchData} />
-            ) : (
-              <ExcelResult resultData={resultData} />
-            )}
-          </Grid>
-        </Grid>
+        <BaseGrid baseData={baseData} setBaseData={setBaseData} setMatchData={setMatchData} selectedColIdBase={selectedColIdBase} setSelectedColIdBase={setSelectedColIdBase} />
       </Grid>
       <Grid item xs={6}>
-        <Grid container direction="column">
-          <ExcelMatch matchData={matchData} setMatchData={setMatchData}/>
-          <VlookupButton baseData={baseData} matchData={matchData} setResultData={setResultData} />
-        </Grid>
+        <MatchGrid matchData={matchData} setMatchData={setMatchData} selectedColIdMatch={selectedColIdMatch} setSelectedColIdMatch={setSelectedColIdMatch} />
+      </Grid>
+      <Grid item xs={6}>
+        <VlookupButton baseData={baseData} matchData={matchData} setResultData={setResultData} selectedColIdBase={selectedColIdBase} selectedColIdMatch={selectedColIdMatch} />
+      </Grid>
+      <Grid item xs={6}>
+        <ResultGrid resultData={resultData} />
       </Grid>
     </Grid>
   );

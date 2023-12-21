@@ -1,4 +1,8 @@
 
-.highlighted-column {
+.highlighted-column-base {
   background-color: #ffcccb; /* or any other color you prefer */
+}
+
+.highlighted-column-match {
+  background-color: #d29b9a; /* or any other color you prefer */
 }

@@ -1,6 +1,6 @@
 
 // ExcelGrid.js
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
@@ -9,42 +9,37 @@ import parseExcelFile from './ExcelParser';
 import FileInput from './FileInput';
 import './ExcelGrid.css';
 
-export const ExcelBase = ( { setMatchData, baseData, setBaseData } ) => {
+export const BaseGrid = ({ baseData, setBaseData, setMatchData, selectedColIdBase, setSelectedColIdBase }) => {
+
   const handleFileChange = async (file) => {
     await parseExcelFile(file).then((parsedData) => {
       setBaseData(parsedData);
     });
   };
 
-  return (
-    <div>
-      <FileInput onFileChange={handleFileChange} />
-      <BaseGrid rowData={baseData} setMatchData={setMatchData} />
-    </div>
-  );
-};
-
-export const BaseGrid = ({ rowData, setMatchData }) => {
-
-  const [selectedColId, setSelectedColId ] = useState("");
-
   const highlightSelectedColumn = (params) => {
-    console.log(params)
-    return params.colDef.colId === selectedColId ? 'highlighted-column' : '';
+    return params.colDef.field === selectedColIdBase ? 'highlighted-column-base' : '';
   };
 
   const getColumnDefs = () => {
-      if (rowData.length === 0) {
+      if (baseData.length === 0) {
           return [];
       }
-      const keys = Object.keys(rowData[0]);
+      const keys = Object.keys(baseData[0]);
       return keys.map((key) => ({
           field: key,
-          cellClass: {highlightSelectedColumn}
+          cellClass: highlightSelectedColumn
       }));
   };
   const columnDefs = getColumnDefs();
-  const paginationPageSize = 20;
+  const paginationPageSize = 10;
+
+  const handleCellClicked = useCallback((params) => {
+    const colId = params.column.colId;
+    if (selectedColIdBase !== colId) {
+      setSelectedColIdBase(colId);
+    }
+  }, [selectedColIdBase, setSelectedColIdBase]);
 
   // extract values and setMatchData
 //  const onColumnMoved = useCallback((params) => {
@@ -89,21 +84,22 @@ export const BaseGrid = ({ rowData, setMatchData }) => {
 //    }
 //  }, [setmatchdata]);
 
-  const handleCellClicked = useCallback((params) => {
-    console.log("handleCellClicked");
-    const colId = params.column.colId;
-    setSelectedColId(colId);
+  const paginationPageSizeSelector = useMemo(() => {
+    return [10, 25, 50, 100];
   }, []);
 
   return (
     <>
-      <div className="ag-theme-alpine" style={{ height: 400, width: '100%' }}>
+      <div>
+        <FileInput onFileChange={handleFileChange} />
+      </div>
+      <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
           columnDefs={columnDefs}
-          rowData={rowData}
+          rowData={baseData}
           pagination={true}
           paginationPageSize={paginationPageSize}
-          domLayout='autoHeight'
+          paginationPageSizeSelector={paginationPageSizeSelector}
           onCellClicked={handleCellClicked}
   //        onColumnMoved={onColumnMoved}
  //         onFirstDataRendered={onFirstDataRendered}
@@ -113,74 +109,69 @@ export const BaseGrid = ({ rowData, setMatchData }) => {
   );
 };
 
-export const ExcelMatch = ( {matchData, setMatchData, setResultData} ) => {
-//  const handleFileChange = async (file) => {
-//    const parsedData = await parseExcelFile(file);
-//    setExcelData(parsedData);
-//  };
+export const MatchGrid = ({ matchData, setMatchData, selectedColIdMatch, setSelectedColIdMatch }) => {
+
   const handleFileChange = async (file) => {
     await parseExcelFile(file).then((parsedData) => {
       setMatchData(parsedData);
     });
   };
 
-  return (
-    <div>
-      <FileInput onFileChange={handleFileChange} />
-      <MatchGrid rowData={matchData} setResultData={setResultData} />
-    </div>
-  );
-};
+  const highlightSelectedColumn = (params) => {
+    return params.colDef.field === selectedColIdMatch ? 'highlighted-column-match' : '';
+  };
 
-export const MatchGrid = ({ rowData }) => {
   const getColumnDefs = () => {
-      if (rowData.length === 0) {
+      if (matchData.length === 0) {
           return [];
       }
-      const keys = Object.keys(rowData[0]);
+      const keys = Object.keys(matchData[0]);
       return keys.map((key) => ({
           field: key,
           editable: true,
+          cellClass: highlightSelectedColumn
       }));
   };
+
   const columnDefs = getColumnDefs();
-  const paginationPageSize = 20;
+
+  const handleCellClicked = useCallback((params) => {
+    const colId = params.column.colId;
+    if (selectedColIdMatch !== colId) {
+      setSelectedColIdMatch(colId);
+    }
+  }, [selectedColIdMatch, setSelectedColIdMatch]);
+
+  const paginationPageSize = 10;
+  const paginationPageSizeSelector = useMemo(() => {
+    return [10, 25, 50, 100];
+  }, []);
 
   return (
     <>
-      <div className="ag-theme-alpine" style={{ height: 400, width: '100%' }}>
+      <div>
+        <FileInput onFileChange={handleFileChange} />
+      </div>
+      <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
           columnDefs={columnDefs}
-          rowData={rowData}
+          rowData={matchData}
           pagination={true}
           paginationPageSize={paginationPageSize}
-          domLayout='autoHeight'
+          paginationPageSizeSelector={paginationPageSizeSelector}
+          onCellClicked={handleCellClicked}
         />
       </div>
     </>
   );
 };
 
-export const ExcelResult = ( {resultData} ) => {
-//  const handleFileChange = async (file) => {
-//    const parsedData = await parseExcelFile(file);
-//    setExcelData(parsedData);
-//  };
-
-  return (
-    <div>
-      <ResultGrid rowData={resultData} />
-    </div>
-  );
-};
-
-
-export const ResultGrid = ({ rowData }) => {
+export const ResultGrid = ({ resultData }) => {
     const getColumnDefs = () => {
-        if (rowData.length === 0) {
+        if (resultData.length === 0) {
             return [];
         }
-        const keys = Object.keys(rowData[0]);
+        const keys = Object.keys(resultData[0]);
         return keys.map((key) => ({
             field: key,
         }));
@@ -189,13 +180,12 @@ export const ResultGrid = ({ rowData }) => {
     const paginationPageSize = 20;
 
   return (
-    <div className="ag-theme-alpine" style={{ height: 400, width: '100%' }}>
+    <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
       <AgGridReact
         columnDefs={columnDefs}
-        rowData={rowData}
+        rowData={resultData}
         pagination={true}
         paginationPageSize={paginationPageSize}
-        domLayout='autoHeight'
       />
     </div>
   );
