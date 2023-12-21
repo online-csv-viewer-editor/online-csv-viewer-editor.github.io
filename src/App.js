@@ -39,7 +39,10 @@ import { VlookupButton } from './VlookupButton';
   // 1-7. look for match on the selected column
   // => check
 
-  // 1-8. 
+  // 1-8. load examples at init
+  // => check
+
+  // 1-9. first column selected on load
   // =>
 
 const SplitScreen = () => {
@@ -62,6 +65,17 @@ const SplitScreen = () => {
     selectedColIdMatch,
     setSelectedColIdMatch
   };
+
+//  const exampleData = {
+//    const exampleBase = [
+//
+//    ];
+//
+//    const exampleMatch = [
+//
+//    ];
+//
+//  }
 
   return (
     <Grid container spacing={2}>
