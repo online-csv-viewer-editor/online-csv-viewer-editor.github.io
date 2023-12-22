@@ -43,7 +43,7 @@ import { VlookupButton } from './VlookupButton';
   // => check
 
   // 1-9. first column selected on load
-  // =>
+  // => /
 
 const SplitScreen = () => {
   const [baseData, setBaseData] = useState([]);

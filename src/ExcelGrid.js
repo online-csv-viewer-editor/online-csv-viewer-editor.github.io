@@ -1,22 +1,15 @@
 
 // ExcelGrid.js
-import { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
-import parseExcelFile from './ExcelParser';
-import FileInput from './FileInput';
+import { FileInput } from './ExcelParser';
 import './ExcelGrid.css';
 
 export const BaseGrid = ({ state }) => {
   const { baseData, setBaseData, setMatchData, selectedColIdBase, setSelectedColIdBase } = state;
-
-  const handleFileChange = async (file) => {
-    await parseExcelFile(file).then((parsedData) => {
-      setBaseData(parsedData);
-    });
-  };
 
   const highlightSelectedColumn = (params) => {
     return params.colDef.field === selectedColIdBase ? 'highlighted-column-base' : '';
@@ -92,7 +85,7 @@ export const BaseGrid = ({ state }) => {
   return (
     <>
       <div>
-        <FileInput onFileChange={handleFileChange} />
+        <FileInput setData={setBaseData} />
       </div>
       <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
@@ -111,12 +104,6 @@ export const BaseGrid = ({ state }) => {
 };
 
 export const MatchGrid = ({ matchData, setMatchData, selectedColIdMatch, setSelectedColIdMatch }) => {
-
-  const handleFileChange = async (file) => {
-    await parseExcelFile(file).then((parsedData) => {
-      setMatchData(parsedData);
-    });
-  };
 
   const highlightSelectedColumn = (params) => {
     return params.colDef.field === selectedColIdMatch ? 'highlighted-column-match' : '';
@@ -151,7 +138,7 @@ export const MatchGrid = ({ matchData, setMatchData, selectedColIdMatch, setSele
   return (
     <>
       <div>
-        <FileInput onFileChange={handleFileChange} />
+        <FileInput setData={setMatchData} />
       </div>
       <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
