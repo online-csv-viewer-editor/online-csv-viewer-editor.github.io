@@ -56,7 +56,7 @@ export const FileInput = ({ setData }) => {
       }
     };
     parsingSheet();
-  }, [workbookRead, sheetNames]);
+  }, [workbookRead, sheetNames, setData]);
 
   const parseSheet = async (index, workbook, workbookSheetNames) => {
     return new Promise((resolve, reject) => {

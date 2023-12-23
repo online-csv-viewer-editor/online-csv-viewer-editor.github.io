@@ -6,3 +6,7 @@
 .highlighted-column-match {
   background-color: #d29b9a; /* or any other color you prefer */
 }
+
+.highlighted-column-match-not {
+  background-color: #e5c4c4; /* or any other color you prefer */
+}

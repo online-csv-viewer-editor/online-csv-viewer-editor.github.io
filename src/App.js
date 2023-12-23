@@ -49,13 +49,23 @@ import { exampleBase, exampleMatch } from './ExampleData';
   // 1-10. first column selected on load
   // => check
 
+  // 1-11. column + column = result
+  // => check
+
+  // 1-11-1. show result on load
+  // => check
+
+  // 1-11-2. color remaining columns
+  // => check
+
+
 const SplitScreen = () => {
   const [baseData, setBaseData] = useState(exampleBase);
   const [matchData, setMatchData] = useState(exampleMatch);
   const [resultData, setResultData] = useState([]);
 
-  const [selectedColIdBase, setSelectedColIdBase ] = useState("");
-  const [selectedColIdMatch, setSelectedColIdMatch ] = useState("");
+  const [selectedColIdBase, setSelectedColIdBase ] = useState("Order Product");
+  const [selectedColIdMatch, setSelectedColIdMatch ] = useState("Product ID");
 
   const stateVariables = {
     baseData,
@@ -82,7 +92,7 @@ const SplitScreen = () => {
         <VlookupButton baseData={baseData} matchData={matchData} setResultData={setResultData} selectedColIdBase={selectedColIdBase} selectedColIdMatch={selectedColIdMatch} />
       </Grid>
       <Grid item xs={6}>
-        <ResultGrid resultData={resultData} />
+        <ResultGrid state={stateVariables} />
       </Grid>
     </Grid>
   );

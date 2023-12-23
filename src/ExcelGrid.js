@@ -22,6 +22,7 @@ export const BaseGrid = ({ state }) => {
       const keys = Object.keys(baseData[0]);
       return keys.map((key) => ({
           field: key,
+          editable: true,
           cellClass: highlightSelectedColumn
       }));
   };
@@ -106,7 +107,7 @@ export const BaseGrid = ({ state }) => {
 export const MatchGrid = ({ matchData, setMatchData, selectedColIdMatch, setSelectedColIdMatch }) => {
 
   const highlightSelectedColumn = (params) => {
-    return params.colDef.field === selectedColIdMatch ? 'highlighted-column-match' : '';
+    return params.colDef.field === selectedColIdMatch ? 'highlighted-column-match' : 'highlighted-column-match-not';
   };
 
   const getColumnDefs = () => {
@@ -154,18 +155,27 @@ export const MatchGrid = ({ matchData, setMatchData, selectedColIdMatch, setSele
   );
 };
 
-export const ResultGrid = ({ resultData }) => {
-    const getColumnDefs = () => {
-        if (resultData.length === 0) {
-            return [];
-        }
-        const keys = Object.keys(resultData[0]);
-        return keys.map((key) => ({
-            field: key,
-        }));
-    };
-    const columnDefs = getColumnDefs();
-    const paginationPageSize = 20;
+export const ResultGrid = ({ state }) => {
+
+  const { resultData, selectedColIdBase } = state;
+
+  const highlightSelectedColumn = (params) => {
+    return params.colDef.field === selectedColIdBase ? 'highlighted-column-base' : 'highlighted-column-match-not';
+  };
+
+  const getColumnDefs = () => {
+      if (resultData.length === 0) {
+          return [];
+      }
+      const keys = Object.keys(resultData[0]);
+      return keys.map((key) => ({
+          field: key,
+          editable: true,
+          cellClass: highlightSelectedColumn
+      }));
+  };
+  const columnDefs = getColumnDefs();
+  const paginationPageSize = 20;
 
   return (
     <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>

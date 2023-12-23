@@ -9,18 +9,18 @@ export const VlookupButton = ( { setResultData, matchData, baseData, selectedCol
     const mergeData = () => {
       return baseData.map(base => {
         const matchingItem = matchData.find(match => base[selectedColIdBase] === match[selectedColIdMatch]);
-        return matchingItem ? { ...base, ...matchingItem } : base;
+        if (matchingItem) {
+          const { [selectedColIdMatch]: _, ...restOfMatch } = matchingItem;
+          return { [selectedColIdBase]: base[selectedColIdBase], ...restOfMatch };
+        } else {
+          return { [selectedColIdBase]: base[selectedColIdBase] };
+        }
       });
     };
 
     if (keysArray.length > 0) {
-      console.log("baseData: ", baseData);
-      console.log("matchData: ", matchData);
-      console.log("selectedColIdBase: ", selectedColIdBase);
-      console.log("selectedColIdMatch: ", selectedColIdMatch);
       // merge json
       const mergedData = mergeData();
-      console.log("mergedData: ", mergedData);
       setResultData(mergedData);
     } else {
       console.log("baseData unavailable");
