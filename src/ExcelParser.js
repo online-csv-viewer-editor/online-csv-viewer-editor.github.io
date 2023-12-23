@@ -2,7 +2,7 @@
 // ExcelParser.js
 import * as XLSX from 'xlsx';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SheetModal } from './SheetModal'
 
 export const FileInput = ({ setData }) => {
@@ -33,34 +33,36 @@ export const FileInput = ({ setData }) => {
     if (file) {
       try {
         const workbook = await readWorkbookAsync(file);
-        console.log("read workbook: ", workbook);
-        setWorkbookRead(workbook);
         const workbookSheetNames = workbook.SheetNames.map((name) => ({ name }));
         setSheetNames(workbookSheetNames);
-        if (workbookSheetNames.length > 1) {
-          setModalIsOpen(true);
-        } else {
-          const result = await parseSheet(0, workbook, workbookSheetNames);
-          if (result) {
-            console.log(result);
-            setData(result);
-          }
-        }
+        setWorkbookRead(workbook);
       } catch (error) {
         console.error('Error reading the file: ', error);
       }
     }
   };
 
+  useEffect(() => {
+    async function parsingSheet() {
+      if (workbookRead !== null && sheetNames.length !== 0) {
+        if (sheetNames.length > 1) {
+          setModalIsOpen(true);
+        } else {
+          const result = await parseSheet(0, workbookRead, sheetNames);
+          if (result) {
+            setData(result);
+          }
+        }
+      }
+    };
+    parsingSheet();
+  }, [workbookRead, sheetNames]);
+
   const parseSheet = async (index, workbook, workbookSheetNames) => {
     return new Promise((resolve, reject) => {
-      console.log("parseSheet workbook: ", workbook);
       if (workbook) {
-        console.log("sheetNames: ", workbookSheetNames);
         const sheet = workbook.Sheets[workbookSheetNames[index].name];
-        console.log("sheet: ", sheet);
         const sheetData = XLSX.utils.sheet_to_json(sheet);
-        console.log("sheetData: ", sheetData);
         resolve(sheetData);
       } else {
         reject("workbook is not available");
@@ -72,7 +74,6 @@ export const FileInput = ({ setData }) => {
     try {
       const result = await parseSheet(index, workbookRead, sheetNames);
       if (result) {
-        console.log(result);
         setData(result);
       }
     } catch (error) {

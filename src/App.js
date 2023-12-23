@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { Grid } from '@mui/material';
 import { BaseGrid, MatchGrid, ResultGrid } from './ExcelGrid';
 import { VlookupButton } from './VlookupButton';
+import { exampleBase, exampleMatch } from './ExampleData';
 
 // Match Data
 // 1. load from selected column. count generate unique
@@ -46,11 +47,11 @@ import { VlookupButton } from './VlookupButton';
   // => check
 
   // 1-10. first column selected on load
-  // => /
+  // => check
 
 const SplitScreen = () => {
-  const [baseData, setBaseData] = useState([]);
-  const [matchData, setMatchData] = useState([]);
+  const [baseData, setBaseData] = useState(exampleBase);
+  const [matchData, setMatchData] = useState(exampleMatch);
   const [resultData, setResultData] = useState([]);
 
   const [selectedColIdBase, setSelectedColIdBase ] = useState("");
@@ -68,17 +69,6 @@ const SplitScreen = () => {
     selectedColIdMatch,
     setSelectedColIdMatch
   };
-
-//  const exampleData = {
-//    const exampleBase = [
-//
-//    ];
-//
-//    const exampleMatch = [
-//
-//    ];
-//
-//  }
 
   return (
     <Grid container spacing={2}>
