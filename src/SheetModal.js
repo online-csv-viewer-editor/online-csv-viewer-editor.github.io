@@ -12,7 +12,7 @@ export const SheetModal = ( { sheetNames, isOpen, onRequestClose, onSelectSheet 
       <DialogTitle>Select a Sheet</DialogTitle>
       <List>
         {sheetNames.map((sheetName, index) => (
-          <ListItemButton key={index} onClick={() => onSelectSheet(index)}>
+          <ListItemButton key={index} onClick={async () => onSelectSheet(index)}>
              <ListItemText primary={sheetName.name} />
           </ListItemButton>
         ))}

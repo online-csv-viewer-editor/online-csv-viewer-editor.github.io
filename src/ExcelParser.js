@@ -33,13 +33,14 @@ export const FileInput = ({ setData }) => {
     if (file) {
       try {
         const workbook = await readWorkbookAsync(file);
+        console.log("read workbook: ", workbook);
         setWorkbookRead(workbook);
         const workbookSheetNames = workbook.SheetNames.map((name) => ({ name }));
         setSheetNames(workbookSheetNames);
         if (workbookSheetNames.length > 1) {
           setModalIsOpen(true);
         } else {
-          const result = parseSheet(0);
+          const result = await parseSheet(0, workbook, workbookSheetNames);
           if (result) {
             console.log(result);
             setData(result);
@@ -51,22 +52,25 @@ export const FileInput = ({ setData }) => {
     }
   };
 
-  const parseSheet = (index) => {
-    console.log("parseSheet workbook: ", workbookRead);
-    if (workbookRead) {
-      const sheet = workbookRead.Sheets[sheetNames[index].name];
-      console.log("sheet: ", sheet);
-      const sheetData = XLSX.utils.sheet_to_json(sheet);
-      console.log("sheetData: ", sheetData);
-      return sheetData;
-    } else {
-      console.log("workbook is not available");
-    }
+  const parseSheet = async (index, workbook, workbookSheetNames) => {
+    return new Promise((resolve, reject) => {
+      console.log("parseSheet workbook: ", workbook);
+      if (workbook) {
+        console.log("sheetNames: ", workbookSheetNames);
+        const sheet = workbook.Sheets[workbookSheetNames[index].name];
+        console.log("sheet: ", sheet);
+        const sheetData = XLSX.utils.sheet_to_json(sheet);
+        console.log("sheetData: ", sheetData);
+        resolve(sheetData);
+      } else {
+        reject("workbook is not available");
+      }
+    });
   };
 
-  const handleSheetSelect = (index) => {
+  const handleSheetSelect = async (index) => {
     try {
-      const result = parseSheet(index);
+      const result = await parseSheet(index, workbookRead, sheetNames);
       if (result) {
         console.log(result);
         setData(result);

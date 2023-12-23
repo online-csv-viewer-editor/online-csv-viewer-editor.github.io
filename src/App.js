@@ -39,10 +39,13 @@ import { VlookupButton } from './VlookupButton';
   // 1-7. look for match on the selected column
   // => check
 
-  // 1-8. load examples at init
+  // 1-8. modal for selecting a sheet
   // => check
 
-  // 1-9. first column selected on load
+  // 1-9. load examples at init
+  // => check
+
+  // 1-10. first column selected on load
   // => /
 
 const SplitScreen = () => {
