@@ -1,5 +1,9 @@
 
+import React from 'react';
 import { Box, Button } from '@mui/material';
+
+import VlookupOne from './images/vlookup_one.png';
+
 
 export const VlookupButton = ( { setResultData, matchData, baseData, selectedColIdBase, selectedColIdMatch } ) => {
 
@@ -29,8 +33,10 @@ export const VlookupButton = ( { setResultData, matchData, baseData, selectedCol
 
 
   return (
-    <Box textAlign="center">
-      <Button onClick={handleClick}>VLOOKUP</Button>
-    </Box>
+    <div>
+      <Box textAlign="center">
+        <img src={VlookupOne} alt="vlookup explanation image" />
+      </Box>
+    </div>
   );
 };

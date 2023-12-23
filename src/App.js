@@ -88,10 +88,10 @@ const SplitScreen = () => {
       <Grid item xs={6}>
         <MatchGrid matchData={matchData} setMatchData={setMatchData} selectedColIdMatch={selectedColIdMatch} setSelectedColIdMatch={setSelectedColIdMatch} />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12}>
         <VlookupButton baseData={baseData} matchData={matchData} setResultData={setResultData} selectedColIdBase={selectedColIdBase} selectedColIdMatch={selectedColIdMatch} />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12}>
         <ResultGrid state={stateVariables} />
       </Grid>
     </Grid>

@@ -9,7 +9,7 @@ import { FileInput } from './ExcelParser';
 import './ExcelGrid.css';
 
 export const BaseGrid = ({ state }) => {
-  const { baseData, setBaseData, setMatchData, selectedColIdBase, setSelectedColIdBase } = state;
+  const { baseData, setBaseData, selectedColIdBase, setSelectedColIdBase } = state;
 
   const highlightSelectedColumn = (params) => {
     return params.colDef.field === selectedColIdBase ? 'highlighted-column-base' : '';
