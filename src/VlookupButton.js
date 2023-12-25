@@ -35,7 +35,7 @@ export const VlookupButton = ( { setResultData, matchData, baseData, selectedCol
   return (
     <div>
       <Box textAlign="center">
-        <img src={VlookupOne} alt="vlookup explanation image" />
+        <img src={VlookupOne} alt="vlookup explanation" />
       </Box>
     </div>
   );

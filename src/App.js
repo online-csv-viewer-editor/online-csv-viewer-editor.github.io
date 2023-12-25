@@ -59,10 +59,11 @@ import ResponsiveAppBar from './ResponsiveAppBar';
   // 1-11-2. color remaining columns
   // => check
 
-  // 1-12. let running task 1. appbar 
+  // 1-12-1. let running task 1. appbar 
   // => check
 
-  //
+  // 1-12-2. let running task 2. footer
+  // => check
 
 const SplitScreen = () => {
   const [baseData, setBaseData] = useState(exampleBase);
