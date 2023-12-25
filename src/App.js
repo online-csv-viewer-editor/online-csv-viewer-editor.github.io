@@ -7,6 +7,7 @@ import { Grid } from '@mui/material';
 import { BaseGrid, MatchGrid, ResultGrid } from './ExcelGrid';
 import { VlookupButton } from './VlookupButton';
 import { exampleBase, exampleMatch } from './ExampleData';
+import ResponsiveAppBar from './ResponsiveAppBar'; 
 
 // Match Data
 // 1. load from selected column. count generate unique
@@ -58,6 +59,10 @@ import { exampleBase, exampleMatch } from './ExampleData';
   // 1-11-2. color remaining columns
   // => check
 
+  // 1-12. let running task 1. appbar 
+  // => check
+
+  //
 
 const SplitScreen = () => {
   const [baseData, setBaseData] = useState(exampleBase);
@@ -82,14 +87,14 @@ const SplitScreen = () => {
 
   return (
     <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <VlookupButton baseData={baseData} matchData={matchData} setResultData={setResultData} selectedColIdBase={selectedColIdBase} selectedColIdMatch={selectedColIdMatch} />
+      </Grid>
       <Grid item xs={6}>
         <BaseGrid state={stateVariables} />
       </Grid>
       <Grid item xs={6}>
         <MatchGrid matchData={matchData} setMatchData={setMatchData} selectedColIdMatch={selectedColIdMatch} setSelectedColIdMatch={setSelectedColIdMatch} />
-      </Grid>
-      <Grid item xs={12}>
-        <VlookupButton baseData={baseData} matchData={matchData} setResultData={setResultData} selectedColIdBase={selectedColIdBase} selectedColIdMatch={selectedColIdMatch} />
       </Grid>
       <Grid item xs={12}>
         <ResultGrid state={stateVariables} />
@@ -100,7 +105,10 @@ const SplitScreen = () => {
 
 const App = () => {
   return (
-    <SplitScreen />
+    <>
+      <ResponsiveAppBar />
+      <SplitScreen />
+    </>
   );
 };
 
