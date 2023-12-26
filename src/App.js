@@ -8,6 +8,7 @@ import { BaseGrid, MatchGrid, ResultGrid } from './ExcelGrid';
 import { VlookupButton } from './VlookupButton';
 import { exampleBase, exampleMatch } from './ExampleData';
 import ResponsiveAppBar from './ResponsiveAppBar'; 
+import Footer from './Footer';
 
 // Match Data
 // 1. load from selected column. count generate unique
@@ -109,6 +110,7 @@ const App = () => {
     <>
       <ResponsiveAppBar />
       <SplitScreen />
+      <Footer />
     </>
   );
 };
