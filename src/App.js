@@ -9,6 +9,7 @@ import { VlookupButton } from './VlookupButton';
 import { exampleBase, exampleMatch } from './ExampleData';
 import ResponsiveAppBar from './ResponsiveAppBar'; 
 import Footer from './Footer';
+import VlookupTitle from './VlookupTitle';
 
 // Match Data
 // 1. load from selected column. count generate unique
@@ -96,13 +97,16 @@ const SplitScreen = () => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <VlookupButton baseData={baseData} matchData={matchData} setResultData={setResultData} selectedColIdBase={selectedColIdBase} selectedColIdMatch={selectedColIdMatch} />
+        <VlookupTitle />
       </Grid>
       <Grid item xs={6}>
         <BaseGrid state={stateVariables} />
       </Grid>
       <Grid item xs={6}>
         <MatchGrid matchData={matchData} setMatchData={setMatchData} selectedColIdMatch={selectedColIdMatch} setSelectedColIdMatch={setSelectedColIdMatch} />
+      </Grid>
+      <Grid item xs={12}>
+        <VlookupButton baseData={baseData} matchData={matchData} setResultData={setResultData} selectedColIdBase={selectedColIdBase} selectedColIdMatch={selectedColIdMatch} />
       </Grid>
       <Grid item xs={12}>
         <ResultGrid state={stateVariables} />
