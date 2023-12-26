@@ -65,6 +65,12 @@ import Footer from './Footer';
 
   // 1-12-2. let running task 2. footer
   // => check
+ 
+  // 1-12-3. let running task 3. figma
+  // => check
+
+  // 1-12-3-1. title h3
+  // => check
 
 const SplitScreen = () => {
   const [baseData, setBaseData] = useState(exampleBase);
