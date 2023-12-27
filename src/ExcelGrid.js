@@ -94,9 +94,9 @@ export const MatchGrid = ({ matchData, setMatchData, selectedColIdMatch, setSele
   }, []);
 
   return (
-    <>
+    <div>
       <div>
-        <FileInput setData={setMatchData} />
+        <FileInput setData={setMatchData} label="UPLOAD match" />
       </div>
       <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
@@ -108,7 +108,7 @@ export const MatchGrid = ({ matchData, setMatchData, selectedColIdMatch, setSele
           onCellClicked={handleCellClicked}
         />
       </div>
-    </>
+    </div>
   );
 };
 

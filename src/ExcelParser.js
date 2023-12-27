@@ -2,7 +2,7 @@
 // ExcelParser.js
 import * as XLSX from 'xlsx';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { InputLabel, Input, Button } from '@mui/material';
 
 import { SheetModal } from './SheetModal'
@@ -86,10 +86,26 @@ export const FileInput = ({ setData, label }) => {
 
   return (
     <div>
-      <InputLabel htmlFor="file-input">
-        <Button>
-          {label}
-        </Button>
+      <InputLabel
+        htmlFor="file-input"
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '8px',
+          mb: '2px',
+          ml: '2px',
+          border: '1px solid #ccc',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          backgroundColor: '#f0f0f0',
+          '&:hover': {
+            backgroundColor: '#e0e0e0',
+          },
+          margin: 'auto',
+        }}
+      >
+        {label}
       </InputLabel>
       <Input
         id="file-input"
