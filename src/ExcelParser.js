@@ -3,9 +3,11 @@
 import * as XLSX from 'xlsx';
 
 import React, { useEffect, useState } from 'react';
+import { InputLabel, Input, Button } from '@mui/material';
+
 import { SheetModal } from './SheetModal'
 
-export const FileInput = ({ setData }) => {
+export const FileInput = ({ setData, label }) => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [sheetNames, setSheetNames] = useState([]);
@@ -84,7 +86,18 @@ export const FileInput = ({ setData }) => {
 
   return (
     <div>
-      <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
+      <InputLabel htmlFor="file-input">
+        <Button>
+          {label}
+        </Button>
+      </InputLabel>
+      <Input
+        id="file-input"
+        type="file"
+        accept=".xlsx, .xls"
+        onChange={handleFileChange}
+        sx={{ display: 'none' }}
+      />
       <SheetModal
         sheetNames={sheetNames}
         isOpen={modalIsOpen}

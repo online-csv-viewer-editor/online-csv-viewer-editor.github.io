@@ -36,49 +36,6 @@ export const BaseGrid = ({ state }) => {
     }
   }, [selectedColIdBase, setSelectedColIdBase]);
 
-  // extract values and setMatchData
-//  const onColumnMoved = useCallback((params) => {
-//    console.log("onColumnMoved. params: ", params)
-//    if (params.finished === true) {
-//      if (params.toIndex === 0) {
-//        const firstColumn = params.api.getAllGridColumns()[0];
-//        if (firstColumn) {
-//          const columnKey = firstColumn.getColId();
-//          const uniqueValuesSet = new Set();
-//          params.api.forEachNode((rowNode) => {
-//            uniqueValuesSet.add(rowNode.data[columnKey]);
-//          });
-//          const uniqueValuesArray = Array.from(uniqueValuesSet);
-//          const uniqueValuesJsonList = uniqueValuesArray.map((value) => ({
-//            [columnKey]: value,
-//          }));
-//          setMatchData(uniqueValuesJsonList);
-//        }
-//      }
-//      const newColumnDefs = params.api.getColumnState();
-//      console.log(params.api.getColumnState());
-//      params.api.setGridOption('columnDefs', newColumnDefs);
-//    }
-//  }, [setMatchData]);
-
-//  const onfirstdatarendered = usecallback((params) => {
-//    const firstcolumn = params.api.getallgridcolumns()[0];
-//    if (firstcolumn) {
-//      const columnkey = firstcolumn.getcolid();
-//      const uniquevaluesset = new set();
-//      params.api.foreachnode((rownode) => {
-//        uniquevaluesset.add(rownode.data[columnkey]);
-//      });
-//      const uniquevaluesarray = array.from(uniquevaluesset);
-//      const uniquevaluesjsonlist = uniquevaluesarray.map((value) => ({
-//        [columnkey]: value,
-//        "editablecolumn": "matching property for " + value
-//      }));
-//      setmatchdata(uniquevaluesjsonlist);
-//      console.log(uniquevaluesjsonlist);
-//    }
-//  }, [setmatchdata]);
-
   const paginationPageSizeSelector = useMemo(() => {
     return [10, 25, 50, 100];
   }, []);
@@ -86,7 +43,7 @@ export const BaseGrid = ({ state }) => {
   return (
     <>
       <div>
-        <FileInput setData={setBaseData} />
+        <FileInput setData={setBaseData} label="UPLOAD base" />
       </div>
       <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
@@ -188,3 +145,46 @@ export const ResultGrid = ({ state }) => {
     </div>
   );
 };
+
+  // extract values and setMatchData
+//  const onColumnMoved = useCallback((params) => {
+//    console.log("onColumnMoved. params: ", params)
+//    if (params.finished === true) {
+//      if (params.toIndex === 0) {
+//        const firstColumn = params.api.getAllGridColumns()[0];
+//        if (firstColumn) {
+//          const columnKey = firstColumn.getColId();
+//          const uniqueValuesSet = new Set();
+//          params.api.forEachNode((rowNode) => {
+//            uniqueValuesSet.add(rowNode.data[columnKey]);
+//          });
+//          const uniqueValuesArray = Array.from(uniqueValuesSet);
+//          const uniqueValuesJsonList = uniqueValuesArray.map((value) => ({
+//            [columnKey]: value,
+//          }));
+//          setMatchData(uniqueValuesJsonList);
+//        }
+//      }
+//      const newColumnDefs = params.api.getColumnState();
+//      console.log(params.api.getColumnState());
+//      params.api.setGridOption('columnDefs', newColumnDefs);
+//    }
+//  }, [setMatchData]);
+
+//  const onfirstdatarendered = usecallback((params) => {
+//    const firstcolumn = params.api.getallgridcolumns()[0];
+//    if (firstcolumn) {
+//      const columnkey = firstcolumn.getcolid();
+//      const uniquevaluesset = new set();
+//      params.api.foreachnode((rownode) => {
+//        uniquevaluesset.add(rownode.data[columnkey]);
+//      });
+//      const uniquevaluesarray = array.from(uniquevaluesset);
+//      const uniquevaluesjsonlist = uniquevaluesarray.map((value) => ({
+//        [columnkey]: value,
+//        "editablecolumn": "matching property for " + value
+//      }));
+//      setmatchdata(uniquevaluesjsonlist);
+//      console.log(uniquevaluesjsonlist);
+//    }
+//  }, [setmatchdata]);

@@ -73,6 +73,12 @@ import VlookupTitle from './VlookupTitle';
   // 1-12-3-1. title h3
   // => check
 
+  // 1-12-3-2. figma image, title, buttons
+  // => check
+
+  // "시작했으면 끝을 내는 습관" => 1년 허탕도 가능
+  // "2차는 다른것"
+
 const SplitScreen = () => {
   const [baseData, setBaseData] = useState(exampleBase);
   const [matchData, setMatchData] = useState(exampleMatch);
