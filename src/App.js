@@ -79,11 +79,11 @@ import VlookupTitle from './VlookupTitle';
   // 1-2-3-3. create new working
   // => check
 
-  // "시작했으면 끝을 내는 습관" => 1년 허탕도 가능
-  // "2차는 다른것" => 마케팅 집중
+  // 1-2-3-4. add column working
+  // => check
 
-  // 1차 목표: google ad로 사용하는지 확인
-  // 2차 목표: export는 premium
+  // 1-2-3-4-1. add column editible working
+  // => check
 
 const SplitScreen = () => {
   const [baseData, setBaseData] = useState(exampleBase);
@@ -138,3 +138,9 @@ const App = () => {
 };
 
 export default App;
+
+  // "시작했으면 끝을 내는 습관" => 1년 허탕도 가능
+  // "2차는 다른것" => 마케팅 집중
+
+  // 1차 목표: google ad로 사용하는지 확인
+  // 2차 목표: export는 premium

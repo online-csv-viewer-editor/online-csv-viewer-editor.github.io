@@ -1,6 +1,6 @@
 
 // ExcelGrid.js
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
@@ -82,7 +82,11 @@ export const MatchGrid = ({ state }) => {
     }));
   };
 
-  const columnDefs = getColumnDefs();
+  const [columnDefs, setColumnDefs] = useState([]);
+
+  useEffect(() => {
+    setColumnDefs(getColumnDefs())
+  }, [matchData]);
 
   const handleCellClicked = useCallback((params) => {
     const colId = params.column.colId;
@@ -96,10 +100,32 @@ export const MatchGrid = ({ state }) => {
     return [10, 25, 50, 100];
   }, []);
 
+  const handleCreateNewClick = () => {
+    const uniqueValuesSet = new Set();
+    for (const item of baseData) {
+      if (item.hasOwnProperty(selectedColIdBase)) {
+        uniqueValuesSet.add(item[selectedColIdBase])
+      }
+    }
+    const uniqueValuesArray = Array.from(uniqueValuesSet);
+    const uniqueValuesJsonList = uniqueValuesArray.map((value) => ({
+      [selectedColIdBase]: value,
+    }));
+    setMatchData(uniqueValuesJsonList);
+  }
+
+  const handleAddColumnClick = () => {
+    const newColumnDefs = [
+      ...columnDefs,
+      { headerName: 'New Column', field: 'newColumn' }
+    ];
+    setColumnDefs(newColumnDefs);
+  }
+
   return (
     <div>
       <div>
-        <FileInput baseData ={baseData} selectedColIdBase={selectedColIdBase} setData={setMatchData} upload="Upload Match" createNew="Create New" addColumn="Add Column"/>
+        <FileInput setData={setMatchData} upload="Upload Match" createNew="Create New" handleCreateNewClick={handleCreateNewClick} addColumn="Add Column" handleAddColumnClick={handleAddColumnClick} />
       </div>
       <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
@@ -134,16 +160,30 @@ export const ResultGrid = ({ state }) => {
           cellClass: highlightSelectedColumn
       }));
   };
-  const columnDefs = getColumnDefs();
+
+  const [columnDefs, setColumnDefs] = useState([]);
+
+  useEffect(() => {
+    setColumnDefs(getColumnDefs())
+  }, [resultData]);
+
   const paginationPageSize = 10;
   const paginationPageSizeSelector = useMemo(() => {
     return [10, 25, 50, 100];
   }, []);
 
+  const handleAddColumnClick = () => {
+    const newColumnDefs = [
+      ...columnDefs,
+      { headerName: 'New Column', field: 'newColumn' }
+    ];
+    setColumnDefs(newColumnDefs);
+  }
+
   return (
     <Box>
       <Box>
-        <FileInput download="Download" addColumn={"Add Column"}/>
+        <FileInput download="Download" addColumn={"Add Column"} handleAddColumnClick={handleAddColumnClick}/>
       </Box>
       <Box className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact

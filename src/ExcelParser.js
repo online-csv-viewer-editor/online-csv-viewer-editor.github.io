@@ -7,7 +7,7 @@ import { Button, ButtonGroup } from '@mui/material';
 
 import { SheetModal } from './SheetModal'
 
-export const FileInput = ({ baseData, selectedColIdBase, setData, upload, createNew, addColumn, download }) => {
+export const FileInput = ({ setData, upload, createNew, handleCreateNewClick, addColumn, handleAddColumnClick, download, handleDownloadClick }) => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [sheetNames, setSheetNames] = useState([]);
@@ -90,20 +90,6 @@ export const FileInput = ({ baseData, selectedColIdBase, setData, upload, create
     if (fileInput) fileInput.current.click();
   }
 
-  const handleCreateNewClick = () => {
-    const uniqueValuesSet = new Set();
-    for (const item of baseData) {
-      if (item.hasOwnProperty(selectedColIdBase)) {
-        uniqueValuesSet.add(item[selectedColIdBase])
-      }
-    }
-    const uniqueValuesArray = Array.from(uniqueValuesSet);
-    const uniqueValuesJsonList = uniqueValuesArray.map((value) => ({
-      [selectedColIdBase]: value,
-    }));
-    setData(uniqueValuesJsonList);
-  }
-
   return (
     <div>
       <input
@@ -120,9 +106,9 @@ export const FileInput = ({ baseData, selectedColIdBase, setData, upload, create
         style={{ margin: '2px' }}
       >
         { upload ? <Button onClick={handleUploadClick}>{upload}</Button> : <></>}
-        { download ? <Button>{download}</Button> : <></>}
+        { download ? <Button onClick={handleDownloadClick}>{download}</Button> : <></>}
         { createNew ? <Button onClick={handleCreateNewClick}>{createNew}</Button> : <></>}
-        { addColumn ? <Button>{addColumn}</Button> : <></>}
+        { addColumn ? <Button onClick={handleAddColumnClick}>{addColumn}</Button> : <></>}
       </ButtonGroup>
       <SheetModal
         sheetNames={sheetNames}
