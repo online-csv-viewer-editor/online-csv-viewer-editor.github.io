@@ -62,22 +62,24 @@ export const BaseGrid = ({ state }) => {
   );
 };
 
-export const MatchGrid = ({ matchData, setMatchData, selectedColIdMatch, setSelectedColIdMatch }) => {
+export const MatchGrid = ({ state }) => {
+
+ const { baseData, selectedColIdBase, matchData, setMatchData, selectedColIdMatch, setSelectedColIdMatch } = state;
 
   const highlightSelectedColumn = (params) => {
     return params.colDef.field === selectedColIdMatch ? 'highlighted-column-match' : 'highlighted-column-match-not';
   };
 
   const getColumnDefs = () => {
-      if (matchData.length === 0) {
-          return [];
-      }
-      const keys = Object.keys(matchData[0]);
-      return keys.map((key) => ({
-          field: key,
-          editable: true,
-          cellClass: highlightSelectedColumn
-      }));
+    if (matchData.length === 0) {
+        return [];
+    }
+    const keys = Object.keys(matchData[0]);
+    return keys.map((key) => ({
+        field: key,
+        editable: true,
+        cellClass: highlightSelectedColumn
+    }));
   };
 
   const columnDefs = getColumnDefs();
@@ -97,7 +99,7 @@ export const MatchGrid = ({ matchData, setMatchData, selectedColIdMatch, setSele
   return (
     <div>
       <div>
-        <FileInput setData={setMatchData} upload="Upload Match" createNew="Create New" addColumn="Add Column"/>
+        <FileInput baseData ={baseData} selectedColIdBase={selectedColIdBase} setData={setMatchData} upload="Upload Match" createNew="Create New" addColumn="Add Column"/>
       </div>
       <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact

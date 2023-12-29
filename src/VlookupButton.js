@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Box, Button, Typography } from '@mui/material';
+import Link from '@mui/material/Link';
 
 import VlookupOneTitle from './images/vlookup_one_title.png';
 
@@ -55,8 +56,8 @@ export const VlookupButton = ( { setResultData, matchData, baseData, selectedCol
         <Typography variant="h3" component="h3" textAlign="center">
           SHOW RESULT
         </Typography>
-        <Typography variant="h7" component="h7" textAlign="center">
-          By using our service you accept our Terms of service and Privacy Policy
+        <Typography variant="h6" component="h6" textAlign="center">
+          By using our service you accept our <Link>Terms of service</Link> and <Link>Privacy Policy</Link>
         </Typography>
       </Box>
     </div>
