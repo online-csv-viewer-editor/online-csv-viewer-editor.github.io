@@ -1,6 +1,7 @@
 
 // ExcelGrid.js
 import React, { useCallback, useMemo } from 'react';
+import { Box } from '@mui/material';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
@@ -41,9 +42,9 @@ export const BaseGrid = ({ state }) => {
   }, []);
 
   return (
-    <>
+    <div>
       <div>
-        <FileInput setData={setBaseData} label="UPLOAD base" />
+        <FileInput setData={setBaseData} upload="UPLOAD base" />
       </div>
       <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
@@ -57,7 +58,7 @@ export const BaseGrid = ({ state }) => {
  //         onFirstDataRendered={onFirstDataRendered}
         />
       </div>
-    </>
+    </div>
   );
 };
 
@@ -96,7 +97,7 @@ export const MatchGrid = ({ matchData, setMatchData, selectedColIdMatch, setSele
   return (
     <div>
       <div>
-        <FileInput setData={setMatchData} label="UPLOAD match" />
+        <FileInput setData={setMatchData} upload="Upload Match" createNew="Create New" addColumn="Add Column"/>
       </div>
       <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
@@ -132,17 +133,26 @@ export const ResultGrid = ({ state }) => {
       }));
   };
   const columnDefs = getColumnDefs();
-  const paginationPageSize = 20;
+  const paginationPageSize = 10;
+  const paginationPageSizeSelector = useMemo(() => {
+    return [10, 25, 50, 100];
+  }, []);
 
   return (
-    <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
-      <AgGridReact
-        columnDefs={columnDefs}
-        rowData={resultData}
-        pagination={true}
-        paginationPageSize={paginationPageSize}
-      />
-    </div>
+    <Box>
+      <Box>
+        <FileInput download="Download" addColumn={"Add Column"}/>
+      </Box>
+      <Box className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
+        <AgGridReact
+          columnDefs={columnDefs}
+          rowData={resultData}
+          pagination={true}
+          paginationPageSize={paginationPageSize}
+          paginationPageSizeSelector={paginationPageSizeSelector}
+        />
+      </Box>
+    </Box>
   );
 };
 

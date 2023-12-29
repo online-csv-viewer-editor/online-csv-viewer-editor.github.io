@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
-import VlookupOne from './images/vlookup_one.png';
+import VlookupOneTitle from './images/vlookup_one_title.png';
 
 
 export const VlookupButton = ( { setResultData, matchData, baseData, selectedColIdBase, selectedColIdMatch } ) => {
@@ -35,7 +35,29 @@ export const VlookupButton = ( { setResultData, matchData, baseData, selectedCol
   return (
     <div>
       <Box textAlign="center">
-        <img src={VlookupOne} alt="vlookup explanation" />
+        <img src={VlookupOneTitle} alt="vlookup explanation" />
+      </Box>
+      <Box
+        textAlign="center"
+        sx={{
+          border: '1px solid #ccc',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          backgroundColor: '#f0f0f0',
+          '&:hover': {
+            backgroundColor: '#e0e0e0',
+          },
+          maxWidth: '50%'
+        }}
+        margin="auto"
+        onClick={handleClick}
+      >
+        <Typography variant="h3" component="h3" textAlign="center">
+          SHOW RESULT
+        </Typography>
+        <Typography variant="h7" component="h7" textAlign="center">
+          By using our service you accept our Terms of service and Privacy Policy
+        </Typography>
       </Box>
     </div>
   );

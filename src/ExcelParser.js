@@ -3,11 +3,11 @@
 import * as XLSX from 'xlsx';
 
 import React, { useEffect, useState, useRef } from 'react';
-import { InputLabel, Input, Button } from '@mui/material';
+import { Button, ButtonGroup } from '@mui/material';
 
 import { SheetModal } from './SheetModal'
 
-export const FileInput = ({ setData, label }) => {
+export const FileInput = ({ setData, upload, createNew, addColumn, download }) => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [sheetNames, setSheetNames] = useState([]);
@@ -84,36 +84,32 @@ export const FileInput = ({ setData, label }) => {
     setModalIsOpen(false);
   };
 
+  const fileInput = useRef(null);
+
+  const handleUploadClick = () => {
+    if (fileInput) fileInput.current.click();
+  }
+
   return (
     <div>
-      <InputLabel
-        htmlFor="file-input"
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '8px',
-          mb: '2px',
-          ml: '2px',
-          border: '1px solid #ccc',
-          borderRadius: '4px',
-          cursor: 'pointer',
-          backgroundColor: '#f0f0f0',
-          '&:hover': {
-            backgroundColor: '#e0e0e0',
-          },
-          margin: 'auto',
-        }}
-      >
-        {label}
-      </InputLabel>
-      <Input
+      <input
         id="file-input"
+        ref={fileInput}
         type="file"
         accept=".xlsx, .xls"
         onChange={handleFileChange}
-        sx={{ display: 'none' }}
+        style={{ display: 'none' }}
       />
+      <ButtonGroup 
+        variant="contained"
+        aria-label="outlined primary button group"
+        style={{ margin: '2px' }}
+      >
+        { upload ? <Button onClick={handleUploadClick}>{upload}</Button> : <></>}
+        { download ? <Button>{download}</Button> : <></>}
+        { createNew ? <Button>{createNew}</Button> : <></>}
+        { addColumn ? <Button>{addColumn}</Button> : <></>}
+      </ButtonGroup>
       <SheetModal
         sheetNames={sheetNames}
         isOpen={modalIsOpen}
