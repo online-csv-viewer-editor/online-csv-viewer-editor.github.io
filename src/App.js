@@ -2,67 +2,27 @@
 import './App.css';
 
 // App.js
-import React, { useState } from 'react';
-import { Grid } from '@mui/material';
-import { BaseGrid, MatchGrid, ResultGrid } from './ExcelGrid';
-import { VlookupButton } from './VlookupButton';
-import { exampleBase, exampleMatch } from './ExampleData';
+import React from 'react';
 import ResponsiveAppBar from './ResponsiveAppBar'; 
 import Footer from './Footer';
-import VlookupTitle from './VlookupTitle';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import VlookupPage from './VlookupPage';
+import VlookupMultiplePage from './VlookupMultiplePage';
 
-  // 2-1. multiple criteria
+  // 2-1. multiple criteria route setup and show different title
   // => check
-
-const SplitScreen = () => {
-  const [baseData, setBaseData] = useState(exampleBase);
-  const [matchData, setMatchData] = useState(exampleMatch);
-  const [resultData, setResultData] = useState([]);
-
-  const [selectedColIdBase, setSelectedColIdBase ] = useState("Order Product");
-  const [selectedColIdMatch, setSelectedColIdMatch ] = useState("Product ID");
-
-  const stateVariables = {
-    baseData,
-    setBaseData,
-    matchData,
-    setMatchData,
-    resultData,
-    setResultData,
-    selectedColIdBase,
-    setSelectedColIdBase,
-    selectedColIdMatch,
-    setSelectedColIdMatch
-  };
-
-  return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <VlookupTitle />
-      </Grid>
-      <Grid item xs={6}>
-        <BaseGrid state={stateVariables} />
-      </Grid>
-      <Grid item xs={6}>
-        <MatchGrid state={stateVariables} />
-      </Grid>
-      <Grid item xs={12}>
-        <VlookupButton baseData={baseData} matchData={matchData} setResultData={setResultData} selectedColIdBase={selectedColIdBase} selectedColIdMatch={selectedColIdMatch} />
-      </Grid>
-      <Grid item xs={12}>
-        <ResultGrid state={stateVariables} />
-      </Grid>
-    </Grid>
-  );
-};
 
 const App = () => {
   return (
-    <>
+    <Router>
       <ResponsiveAppBar />
-      <SplitScreen />
+      <Routes>
+        <Route path="/" element={<VlookupPage />} />
+        <Route path="/single" element={<VlookupPage />} />
+        <Route path="/multiple" element={<VlookupMultiplePage />} />
+      </Routes>
       <Footer />
-    </>
+    </Router>
   );
 };
 
