@@ -11,78 +11,7 @@ import ResponsiveAppBar from './ResponsiveAppBar';
 import Footer from './Footer';
 import VlookupTitle from './VlookupTitle';
 
-// Match Data
-// 1. load from selected column. count generate unique
-
-  // 1-1. first base column
-  // extract to match
-  // find unique
-
-// => check
-
-  // 1-2. data to match first column
-
-  // => check
-
-  // 1-3. edit match 2nd column
-
-  // => check
-
-  // 1-4. copy data to result first column
-  // => check
-
-  // 1-5. import
-  // => check
-
-  // 1-6-1. select key column in base and highlight
-  // => check
-
-  // 1-6-2. select key column in match and highlight
-  // => check
-
-  // 1-7. look for match on the selected column
-  // => check
-
-  // 1-8. modal for selecting a sheet
-  // => check
-
-  // 1-9. load examples at init
-  // => check
-
-  // 1-10. first column selected on load
-  // => check
-
-  // 1-11. column + column = result
-  // => check
-
-  // 1-11-1. show result on load
-  // => check
-
-  // 1-11-2. color remaining columns
-  // => check
-
-  // 1-12-1. let running task 1. appbar 
-  // => check
-
-  // 1-12-2. let running task 2. footer
-  // => check
- 
-  // 1-12-3. let running task 3. figma
-  // => check
-
-  // 1-12-3-1. title h3
-  // => check
-
-  // 1-12-3-2. figma image, title, buttons
-  // => check
-
-  // 1-2-3-3. create new working
-  // => check
-
-  // 1-2-3-4. add column working
-  // => check
-
-  // 1-2-3-4-1. add column editible working
+  // 2-1. multiple criteria
   // => check
 
 const SplitScreen = () => {
@@ -142,5 +71,5 @@ export default App;
   // "시작했으면 끝을 내는 습관" => 1년 허탕도 가능
   // "2차는 다른것" => 마케팅 집중
 
-  // 1차 목표: google ad로 사용하는지 확인
+  // 1차 목표: google ad로 사용하는지 확인 (구매대행, ..., 외국인 사용 용도 등 custom target에 제공)
   // 2차 목표: export는 premium

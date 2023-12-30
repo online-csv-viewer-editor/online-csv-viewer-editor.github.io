@@ -7,7 +7,7 @@ import { Button, ButtonGroup } from '@mui/material';
 
 import { SheetModal } from './SheetModal'
 
-export const FileInput = ({ setData, upload, createNew, handleCreateNewClick, addColumn, handleAddColumnClick, download, handleDownloadClick }) => {
+export const FileInput = ({ data, setData, upload, createNew, handleCreateNewClick, addColumn, handleAddColumnClick, download }) => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [sheetNames, setSheetNames] = useState([]);
@@ -90,6 +90,14 @@ export const FileInput = ({ setData, upload, createNew, handleCreateNewClick, ad
     if (fileInput) fileInput.current.click();
   }
 
+  const handleDownloadClick = () => {
+    const utils = XLSX.utils;
+    const worksheet = utils.json_to_sheet(data);
+    const workbook = utils.book_new();
+    utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    XLSX.writeFile(workbook, 'workbook.xlsx');
+  }
+
   return (
     <div>
       <input
@@ -106,8 +114,8 @@ export const FileInput = ({ setData, upload, createNew, handleCreateNewClick, ad
         style={{ margin: '2px' }}
       >
         { upload ? <Button onClick={handleUploadClick}>{upload}</Button> : <></>}
-        { download ? <Button onClick={handleDownloadClick}>{download}</Button> : <></>}
         { createNew ? <Button onClick={handleCreateNewClick}>{createNew}</Button> : <></>}
+        { download ? <Button onClick={handleDownloadClick}>{download}</Button> : <></>}
         { addColumn ? <Button onClick={handleAddColumnClick}>{addColumn}</Button> : <></>}
       </ButtonGroup>
       <SheetModal

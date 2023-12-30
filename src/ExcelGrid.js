@@ -86,9 +86,10 @@ export const MatchGrid = ({ state }) => {
 
   useEffect(() => {
     setColumnDefs(getColumnDefs())
-  }, [matchData]);
+  }, [matchData, selectedColIdMatch]);
 
   const handleCellClicked = useCallback((params) => {
+    console.log("handleCellClicked");
     const colId = params.column.colId;
     if (selectedColIdMatch !== colId) {
       setSelectedColIdMatch(colId);
@@ -122,10 +123,14 @@ export const MatchGrid = ({ state }) => {
     setColumnDefs(newColumnDefs);
   }
 
+  const handleDownloadClick = () => {
+
+  }
+
   return (
     <div>
       <div>
-        <FileInput setData={setMatchData} upload="Upload Match" createNew="Create New" handleCreateNewClick={handleCreateNewClick} addColumn="Add Column" handleAddColumnClick={handleAddColumnClick} />
+        <FileInput data={matchData} setData={setMatchData} upload="Upload Match" createNew="Create New" handleCreateNewClick={handleCreateNewClick} download="Download" />
       </div>
       <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
@@ -183,7 +188,7 @@ export const ResultGrid = ({ state }) => {
   return (
     <Box>
       <Box>
-        <FileInput download="Download" addColumn={"Add Column"} handleAddColumnClick={handleAddColumnClick}/>
+        <FileInput data={resultData} download="Download" />
       </Box>
       <Box className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
