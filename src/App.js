@@ -3,12 +3,12 @@ import './App.css';
 
 // App.js
 import React from 'react';
-import ResponsiveAppBar from './ResponsiveAppBar'; 
-import Footer from './Footer';
+import ResponsiveAppBar from './components/ResponsiveAppBar'; 
+import Footer from './components/Footer';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import VlookupPage from './VlookupPage';
-import VlookupMultiplePage from './VlookupMultiplePage';
-import VlookupJapantimemallPage from './VlookupJapantimemallPage';
+import VlookupPage from './pages/VlookupSingle/VlookupPage';
+import VlookupMultiplePage from './pages/VlookupMultiple/VlookupMultiplePage';
+import VlookupJapantimemallPage from './pages/VlookupJapantimemall/VlookupJapantimemallPage';
 
   // 2-1. multiple criteria route setup and show different title
   // => check

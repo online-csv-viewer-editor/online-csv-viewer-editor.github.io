@@ -1,15 +1,12 @@
 
 import React, { useState } from 'react';
 import { Grid } from '@mui/material';
-import { BaseGrid, MatchGrid, ResultGrid } from './ExcelGrid';
-import { VlookupButton } from './VlookupButton';
-import { exampleBase, exampleMatch } from './ExampleData';
-import VlookupTitle from './VlookupTitle';
+import { BaseGrid, MatchGrid, ResultGrid } from '../VlookupShared/ExcelGrid';
+import { VlookupButton } from '../VlookupShared/VlookupButton';
+import { exampleBase, exampleMatch } from '../VlookupShared/ExampleData';
+import VlookupJapantimemallTitle from './VlookupJapantimemallTitle';
 
-  // 2-1. multiple criteria route setup and show different title
-  // => check
-
-const VlookupPage = () => {
+const VlookupJapantimemallPage = () => {
   const [baseData, setBaseData] = useState(exampleBase);
   const [matchData, setMatchData] = useState(exampleMatch);
   const [resultData, setResultData] = useState([]);
@@ -33,7 +30,7 @@ const VlookupPage = () => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <VlookupTitle />
+        <VlookupJapantimemallTitle />
       </Grid>
       <Grid item xs={6}>
         <BaseGrid state={stateVariables} />
@@ -51,4 +48,4 @@ const VlookupPage = () => {
   );
 };
 
-export default VlookupPage;
+export default VlookupJapantimemallPage;

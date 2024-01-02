@@ -1,12 +1,15 @@
 
 import React, { useState } from 'react';
 import { Grid } from '@mui/material';
-import { BaseGrid, MatchGrid, ResultGrid } from './ExcelGrid';
-import { VlookupButton } from './VlookupButton';
-import { exampleBase, exampleMatch } from './ExampleData';
-import VlookupJapantimemallTitle from './VlookupJapantimemallTitle';
+import { BaseGrid, MatchGrid, ResultGrid } from '../VlookupShared/ExcelGrid';
+import { VlookupButton } from '../VlookupShared/VlookupButton';
+import { exampleBase, exampleMatch } from '../VlookupShared/ExampleData';
+import VlookupTitle from './VlookupTitle';
 
-const VlookupJapantimemallPage = () => {
+  // 2-1. multiple criteria route setup and show different title
+  // => check
+
+const VlookupPage = () => {
   const [baseData, setBaseData] = useState(exampleBase);
   const [matchData, setMatchData] = useState(exampleMatch);
   const [resultData, setResultData] = useState([]);
@@ -30,7 +33,7 @@ const VlookupJapantimemallPage = () => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <VlookupJapantimemallTitle />
+        <VlookupTitle />
       </Grid>
       <Grid item xs={6}>
         <BaseGrid state={stateVariables} />
@@ -48,4 +51,4 @@ const VlookupJapantimemallPage = () => {
   );
 };
 
-export default VlookupJapantimemallPage;
+export default VlookupPage;

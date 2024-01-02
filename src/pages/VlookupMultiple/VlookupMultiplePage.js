@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react';
 import { Grid } from '@mui/material';
-import { BaseGrid, MatchGrid, ResultGrid } from './ExcelGrid';
-import { VlookupButton } from './VlookupButton';
-import { exampleBase, exampleMatch } from './ExampleData';
+import { BaseGrid, MatchGrid, ResultGrid } from '../VlookupShared/ExcelGrid';
+import { VlookupButton } from '../VlookupShared/VlookupButton';
+import { exampleBase, exampleMatch } from '../VlookupShared/ExampleData';
 import VlookupMultipleTitle from './VlookupMultipleTitle';
 
 const VlookupMultiplePage = () => {

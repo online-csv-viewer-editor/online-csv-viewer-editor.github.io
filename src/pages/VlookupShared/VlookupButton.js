@@ -3,8 +3,7 @@ import React from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 
-import VlookupOneTitle from './images/vlookup_one_title.png';
-
+import VlookupOneTitle from '../../images/vlookup_one_title.png';
 
 export const VlookupButton = ( { setResultData, matchData, baseData, selectedColIdBase, selectedColIdMatch } ) => {
 
