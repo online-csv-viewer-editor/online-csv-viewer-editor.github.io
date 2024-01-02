@@ -13,7 +13,7 @@ import VlookupJapantimemallPage from './pages/VlookupJapantimemall/VlookupJapant
   // 2-1. multiple criteria route setup and show different title
   // => check
 
-  // 2-2. coupang excel base 등록 및 추출 칼럼 선택
+  // 2-2. select two from base, and click create new in match
   // => check
 
 const App = () => {

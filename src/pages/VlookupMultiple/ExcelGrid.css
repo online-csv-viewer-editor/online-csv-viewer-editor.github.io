@@ -1,0 +1,12 @@
+
+.highlighted-column-base {
+  background-color: #5FBDFF; /* or any other color you prefer */
+}
+
+.highlighted-column-match {
+  background-color: #96EFFF; /* or any other color you prefer */
+}
+
+.highlighted-column-match-not {
+  background-color: #C5FFF8; /* or any other color you prefer */
+}
