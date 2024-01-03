@@ -10,10 +10,21 @@ import { FileInput } from './ExcelParser';
 import './ExcelGrid.css';
 
 export const BaseGrid = ({ state }) => {
-  const { baseData, setBaseData, selectedColIdBase, setSelectedColIdBase } = state;
+  const { stringArrayBase, setStringArrayBase, baseData, setBaseData, selectedColIdBase, setSelectedColIdBase } = state;
+
+  const colorList = [
+    'highlighted-column-one',
+    'highlighted-column-two',
+    'highlighted-column-three',
+    'highlighted-column-four',
+    'highlighted-column-five',
+  ]
 
   const highlightSelectedColumn = (params) => {
-    return params.colDef.field === selectedColIdBase ? 'highlighted-column-base' : '';
+    if (selectedColIdBase.has(params.colDef.field)) {
+      const index = stringArrayBase.indexOf(params.colDef.field);
+      return colorList[index];
+    } else return '';
   };
 
   const getColumnDefs = () => {
@@ -23,17 +34,36 @@ export const BaseGrid = ({ state }) => {
       const keys = Object.keys(baseData[0]);
       return keys.map((key) => ({
           field: key,
-          editable: true,
           cellClass: highlightSelectedColumn
       }));
   };
   const columnDefs = getColumnDefs();
   const paginationPageSize = 10;
 
+  const addString = (newString) => {
+    const newSet = new Set(selectedColIdBase);
+    newSet.add(newString);
+
+    setSelectedColIdBase(newSet);
+
+    setStringArrayBase([...stringArrayBase, newString]);
+  };
+
+  const removeString = (toBeRemoved) => {
+    const newSet = new Set(selectedColIdBase);
+    newSet.delete(toBeRemoved);
+
+    setSelectedColIdBase(newSet);
+
+    setStringArrayBase(stringArrayBase.filter((str) => str !== toBeRemoved));
+  };
+
   const handleCellClicked = useCallback((params) => {
     const colId = params.column.colId;
-    if (selectedColIdBase !== colId) {
-      setSelectedColIdBase(colId);
+    if (selectedColIdBase.has(colId)) {
+      removeString(colId);
+    } else {
+      addString(colId);
     }
   }, [selectedColIdBase, setSelectedColIdBase]);
 
@@ -62,10 +92,39 @@ export const BaseGrid = ({ state }) => {
 
 export const MatchGrid = ({ state }) => {
 
- const { baseData, selectedColIdBase, matchData, setMatchData, selectedColIdMatch, setSelectedColIdMatch } = state;
+  const { stringArrayMatch, setStringArrayMatch, baseData, selectedColIdBase, matchData, setMatchData, selectedColIdMatch, setSelectedColIdMatch } = state;
+
+  const colorList = [
+    'highlighted-column-one',
+    'highlighted-column-two',
+    'highlighted-column-three',
+    'highlighted-column-four',
+    'highlighted-column-five',
+  ]
 
   const highlightSelectedColumn = (params) => {
-    return params.colDef.field === selectedColIdMatch ? 'highlighted-column-match' : 'highlighted-column-match-not';
+    if (selectedColIdMatch.has(params.colDef.field)) {
+      const index = stringArrayMatch.indexOf(params.colDef.field);
+      return colorList[index];
+    } else return '';
+  };
+
+  const addString = (newString) => {
+    const newSet = new Set(selectedColIdMatch);
+    newSet.add(newString);
+
+    setSelectedColIdMatch(newSet);
+
+    setStringArrayMatch([...stringArrayMatch, newString]);
+  };
+
+  const removeString = (toBeRemoved) => {
+    const newSet = new Set(selectedColIdMatch);
+    newSet.delete(toBeRemoved);
+
+    setSelectedColIdMatch(newSet);
+
+    setStringArrayMatch(stringArrayMatch.filter((str) => str !== toBeRemoved));
   };
 
   const getColumnDefs = () => {
@@ -87,10 +146,11 @@ export const MatchGrid = ({ state }) => {
   }, [matchData, selectedColIdMatch]);
 
   const handleCellClicked = useCallback((params) => {
-    console.log("handleCellClicked");
     const colId = params.column.colId;
-    if (selectedColIdMatch !== colId) {
-      setSelectedColIdMatch(colId);
+    if (selectedColIdMatch.has(colId)) {
+      removeString(colId);
+    } else {
+      addString(colId);
     }
   }, [selectedColIdMatch, setSelectedColIdMatch]);
 

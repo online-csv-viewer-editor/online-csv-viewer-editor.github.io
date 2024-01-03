@@ -11,8 +11,11 @@ const VlookupMultiplePage = () => {
   const [matchData, setMatchData] = useState(exampleMatch);
   const [resultData, setResultData] = useState([]);
 
-  const [selectedColIdBase, setSelectedColIdBase ] = useState("Order Product");
-  const [selectedColIdMatch, setSelectedColIdMatch ] = useState("Product ID");
+  const [selectedColIdBase, setSelectedColIdBase ] = useState(new Set());
+  const [selectedColIdMatch, setSelectedColIdMatch ] = useState(new Set());
+
+  const [stringArrayBase, setStringArrayBase] = useState([]);
+  const [stringArrayMatch, setStringArrayMatch] = useState([]);
 
   const stateVariables = {
     baseData,
@@ -24,7 +27,11 @@ const VlookupMultiplePage = () => {
     selectedColIdBase,
     setSelectedColIdBase,
     selectedColIdMatch,
-    setSelectedColIdMatch
+    setSelectedColIdMatch,
+    stringArrayBase,
+    setStringArrayBase,
+    stringArrayMatch,
+    setStringArrayMatch
   };
 
   return (
