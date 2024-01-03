@@ -7,7 +7,7 @@ import { Button, ButtonGroup } from '@mui/material';
 
 import { SheetModal } from '../VlookupShared/SheetModal'
 
-export const FileInput = ({ data, setData, upload, createNew, handleCreateNewClick, addColumn, handleAddColumnClick, download }) => {
+export const FileInput = ({ reset, data, setData, upload, createNew, handleCreateNewClick, addColumn, handleAddColumnClick, download }) => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [sheetNames, setSheetNames] = useState([]);
@@ -38,6 +38,7 @@ export const FileInput = ({ data, setData, upload, createNew, handleCreateNewCli
         const workbookSheetNames = workbook.SheetNames.map((name) => ({ name }));
         setSheetNames(workbookSheetNames);
         setWorkbookRead(workbook);
+        reset();
       } catch (error) {
         console.error('Error reading the file: ', error);
       }

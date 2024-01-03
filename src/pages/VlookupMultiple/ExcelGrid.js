@@ -71,10 +71,15 @@ export const BaseGrid = ({ state }) => {
     return [10, 25, 50, 100];
   }, []);
 
+  const resetBaseSelected = () => {
+    setSelectedColIdBase(new Set());
+    setStringArrayBase([]);
+  };
+
   return (
     <div>
       <div>
-        <FileInput setData={setBaseData} upload="UPLOAD base" />
+        <FileInput reset={resetBaseSelected} setData={setBaseData} upload="UPLOAD base" />
       </div>
       <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
@@ -197,10 +202,15 @@ export const MatchGrid = ({ state }) => {
     setColumnDefs(newColumnDefs);
   }
 
+  const resetMatchSelected = () => {
+    setSelectedColIdMatch(new Set());
+    setStringArrayMatch([]);
+  };
+
   return (
     <div>
       <div>
-        <FileInput data={matchData} setData={setMatchData} upload="Upload Match" createNew="Create New" handleCreateNewClick={handleCreateNewClick} download="Download" />
+        <FileInput reset={resetMatchSelected} data={matchData} setData={setMatchData} upload="Upload Match" createNew="Create New" handleCreateNewClick={handleCreateNewClick} download="Download" />
       </div>
       <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact

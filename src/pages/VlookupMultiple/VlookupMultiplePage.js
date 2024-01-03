@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Grid } from '@mui/material';
 import { BaseGrid, MatchGrid, ResultGrid } from './ExcelGrid';
-import { VlookupButton } from '../VlookupShared/VlookupButton';
+import { VlookupButton } from './VlookupButton';
 import { exampleBase, exampleMatch } from '../VlookupShared/ExampleData';
 import VlookupMultipleTitle from './VlookupMultipleTitle';
 
@@ -46,7 +46,7 @@ const VlookupMultiplePage = () => {
         <MatchGrid state={stateVariables} />
       </Grid>
       <Grid item xs={12}>
-        <VlookupButton baseData={baseData} matchData={matchData} setResultData={setResultData} selectedColIdBase={selectedColIdBase} selectedColIdMatch={selectedColIdMatch} />
+        <VlookupButton state={stateVariables} />
       </Grid>
       <Grid item xs={12}>
         <ResultGrid state={stateVariables} />
