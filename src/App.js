@@ -16,6 +16,9 @@ import VlookupJapantimemallPage from './pages/VlookupJapantimemall/VlookupJapant
   // 2-2. select two from base, and click create new in match
   // => check
 
+  // 2-3. make example base. create new test. make example match. show result
+  // => check
+
 const App = () => {
   return (
     <Router>

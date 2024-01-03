@@ -92,7 +92,7 @@ export const BaseGrid = ({ state }) => {
 
 export const MatchGrid = ({ state }) => {
 
-  const { stringArrayMatch, setStringArrayMatch, baseData, selectedColIdBase, matchData, setMatchData, selectedColIdMatch, setSelectedColIdMatch } = state;
+  const { stringArrayBase, stringArrayMatch, setStringArrayMatch, baseData, selectedColIdBase, matchData, setMatchData, selectedColIdMatch, setSelectedColIdMatch } = state;
 
   const colorList = [
     'highlighted-column-one',
@@ -159,17 +159,33 @@ export const MatchGrid = ({ state }) => {
     return [10, 25, 50, 100];
   }, []);
 
-  const handleCreateNewClick = () => {
-    const uniqueValuesSet = new Set();
-    for (const item of baseData) {
-      if (item.hasOwnProperty(selectedColIdBase)) {
-        uniqueValuesSet.add(item[selectedColIdBase])
+  function createNewJSON(originalJSON, keys) {
+    const newJSON = {};
+
+    keys.forEach(key => {
+      if (originalJSON.hasOwnProperty(key)) {
+        newJSON[key] = originalJSON[key];
       }
-    }
-    const uniqueValuesArray = Array.from(uniqueValuesSet);
-    const uniqueValuesJsonList = uniqueValuesArray.map((value) => ({
-      [selectedColIdBase]: value,
-    }));
+    });
+
+    return newJSON;
+  }
+
+  const handleCreateNewClick = () => {
+    const uniqueNewSet = new Set();
+    const uniqueValuesJsonList = baseData.reduce((accumulator, json) => {
+      const newJSON = createNewJSON(json, stringArrayBase);
+      const newJSONString = JSON.stringify(newJSON);
+
+      if (!uniqueNewSet.has(newJSONString)) {
+        uniqueNewSet.add(newJSONString);
+        accumulator.push(newJSON);
+      }
+
+      return accumulator;
+
+    }, []);
+
     setMatchData(uniqueValuesJsonList);
   }
 
