@@ -12,21 +12,21 @@
 }
 
 .highlighted-column-one {
-  background-color: #FE938C; /* or any other color you prefer */
-}
-
-.highlighted-column-two {
-  background-color: #E6B89C; /* or any other color you prefer */
-}
-
-.highlighted-column-three {
   background-color: #EAD2AC; /* or any other color you prefer */
 }
 
-.highlighted-column-four {
+.highlighted-column-two {
   background-color: #9CAFB7; /* or any other color you prefer */
 }
 
-.highlighted-column-five {
+.highlighted-column-three {
   background-color: #4281A4; /* or any other color you prefer */
+}
+
+.highlighted-column-four {
+  background-color: #E6B89C; /* or any other color you prefer */
+}
+
+.highlighted-column-five {
+  background-color: #FE938C; /* or any other color you prefer */
 }

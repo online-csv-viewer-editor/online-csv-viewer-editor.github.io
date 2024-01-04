@@ -1,13 +1,16 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
+import Alert from '@mui/material/Alert';
 
 import VlookupOneTitle from '../../images/vlookup_one_title.png';
 
 export const VlookupButton = ({ state }) => {
 
   const { setResultData, matchData, baseData, selectedColIdBase, selectedColIdMatch, stringArrayBase, stringArrayMatch } = state;
+
+  const [error, setError] = useState("");
 
   const handleClick = () => {
 
@@ -48,10 +51,19 @@ export const VlookupButton = ({ state }) => {
     };
 
     const checkError = () => {
-      if (stringArrayBase.length !== stringArrayMatch.length) {
-        //alert("NUMBER OF CRITERIA DOES NOT MATCH");
+      if (stringArrayBase.length === 0) {
+        setError("Please, select a column in base by clicking on a cell");
         return false;
       }
+      if (stringArrayMatch.length === 0) {
+        setError("Please, select a column in match by clicking on a cell");
+        return false;
+      }
+      if (stringArrayBase.length !== stringArrayMatch.length) {
+        setError("Numbers of selected columns do not match");
+        return false;
+      }
+      setError("")
       return true;
     };
 
@@ -64,7 +76,6 @@ export const VlookupButton = ({ state }) => {
       console.log("baseData unavailable");
     }
   };
-
 
   return (
     <div>
@@ -93,6 +104,21 @@ export const VlookupButton = ({ state }) => {
           By using our service you accept our <Link>Terms of service</Link> and <Link>Privacy Policy</Link>
         </Typography>
       </Box>
+      {
+        error ?
+          <Box
+            sx={{
+              maxWidth: '400px'
+            }}
+            margin="auto"
+            mt="5px"
+          >
+            <Alert variant="filled" severity="error">
+              {error}
+            </Alert>
+          </Box>
+        : <></>
+      }
     </div>
   );
 };
