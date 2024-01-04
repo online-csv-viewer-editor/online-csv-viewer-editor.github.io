@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { BaseGrid, MatchGrid, ResultGrid } from './ExcelGrid';
 import { VlookupButton } from './VlookupButton';
@@ -33,6 +33,10 @@ const VlookupMultiplePage = () => {
     stringArrayMatch,
     setStringArrayMatch
   };
+
+  useEffect(() => {
+      document.title = 'VLOOKUP multiple criteria';
+  }, []);
 
   return (
     <Grid container spacing={2}>

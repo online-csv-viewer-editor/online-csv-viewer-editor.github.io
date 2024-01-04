@@ -9,8 +9,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://mike-tyson.tistory.com/">
+        Mike Tyson
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -18,26 +18,49 @@ function Copyright() {
   );
 }
 
+function Privacy() {
+  return (
+    <Typography m="3px" variant="body1">
+      <Link color="inherit" href="https://mike-tyson.tistory.com/">
+      Privacy
+      </Link>
+    </Typography>
+  );
+};
+
+function Terms() {
+  return (
+    <Typography m="3px" variant="body1">
+      <Link color="inherit" href="https://mike-tyson.tistory.com/">
+      Terms
+      </Link>
+    </Typography>
+  );
+};
+
 export default function Footer() {
   return (
         <Box
           component="footer"
           sx={{
-            py: 3,
-            px: 2,
+            py: 1,
+            px: 1,
             mt: 'auto',
             backgroundColor: (theme) =>
               theme.palette.mode === 'light'
                 ? theme.palette.grey[200]
                 : theme.palette.grey[800],
           }}
+          display={"flex"}
+          justifyContent={"flex-end"}
         >
-          <Container maxWidth="sm">
-            <Typography variant="body1">
-              My sticky footer can be found here.
-            </Typography>
+          <Box maxWidth="sm">
+            <Box display={"flex"}>
+              <Terms />
+              <Privacy />
+            </Box>
             <Copyright />
-          </Container>
+          </Box>
         </Box>
   );
 }
