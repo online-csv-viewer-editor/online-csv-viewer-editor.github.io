@@ -19,6 +19,9 @@ import VlookupJapantimemallPage from './pages/VlookupJapantimemall/VlookupJapant
   // 2-3. make example base. create new test. make example match. show result
   // => check
 
+  // 2-4. logo and footer (Fix only words and logo image)
+  // => check
+
 const App = () => {
   return (
     <Router>
