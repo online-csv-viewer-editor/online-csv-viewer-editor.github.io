@@ -5,42 +5,59 @@ import Link from '@mui/material/Link';
 
 import VlookupOneTitle from '../../images/vlookup_one_title.png';
 
-export const VlookupButton = ( state ) => {
+export const VlookupButton = ({ state }) => {
 
   const { setResultData, matchData, baseData, selectedColIdBase, selectedColIdMatch, stringArrayBase, stringArrayMatch } = state;
 
   const handleClick = () => {
 
-    if (stringArrayBase.length !== stringArrayMatch.length) {
-      alert("NUMBER OF CRITERIA DOES NOT MATCH");
-      return;
-    }
-
     const keysArray = Object.keys(baseData);
 
-    function itemsMatch(item1, item2) {
+    function checkItemsMatch(base, match) {
       for (let i = 0; i < stringArrayBase.length; i++) {
-        const item1key = stringArrayBase[i];
-        const item2key = stringArrayBase[i];
-        if (item1[item1key] !== item2[item2key]) return false;
+        const baseKey = stringArrayBase[i];
+        const matchKey = stringArrayMatch[i];
+        if (base[baseKey] !== match[matchKey]) return false;
       }
       return true;
     }
 
-    const mergeData = () => {
-      return baseData.map(base => {
-        const matchingItem = matchData.find(match => itemsMatch(base, match));
-        if (matchingItem) {
-          const { [selectedColIdMatch]: _, ...restOfMatch } = matchingItem;
-          return { [selectedColIdBase]: base[selectedColIdBase], ...restOfMatch };
-        } else {
-          return { [selectedColIdBase]: base[selectedColIdBase] };
-        }
-      });
+    const modifyBaseUsingMatch = (base) => {
+
+      const keysToKeepFromBase = selectedColIdBase;
+      const modifiedBase = Object.fromEntries(
+        Object.entries(base).filter(([key]) => keysToKeepFromBase.has(key))
+      );
+
+      const matchingItem = matchData.find(match => checkItemsMatch(base, match));
+
+      if (matchingItem) {
+        const keysToRemoveFromMatch = selectedColIdMatch;
+        const modifiedMatch = Object.fromEntries(
+          Object.entries(matchingItem).filter(([key]) => !keysToRemoveFromMatch.has(key))
+        );
+        return { ...modifiedBase, ...modifiedMatch};
+      } else {
+        return { ...modifiedBase };
+      }
+
     };
 
+    const mergeData = () => {
+      return baseData.map(base => modifyBaseUsingMatch(base));
+    };
+
+    const checkError = () => {
+      if (stringArrayBase.length !== stringArrayMatch.length) {
+        //alert("NUMBER OF CRITERIA DOES NOT MATCH");
+        return false;
+      }
+      return true;
+    };
+
+    if (!checkError()) return;
+
     if (keysArray.length > 0) {
-      // merge json
       const mergedData = mergeData();
       setResultData(mergedData);
     } else {
