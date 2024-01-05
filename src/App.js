@@ -22,6 +22,12 @@ import VlookupJapantimemallPage from './pages/VlookupJapantimemall/VlookupJapant
   // 2-4. logo and footer (Fix only words and logo image)
   // => check
 
+  // 2-4-2. explanation gif
+  // => check
+
+  // 2-5. up and running. ga setup to check
+  // => check
+
 const App = () => {
   return (
     <Router>

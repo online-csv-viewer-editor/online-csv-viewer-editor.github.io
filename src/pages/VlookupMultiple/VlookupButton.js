@@ -4,7 +4,7 @@ import { Box, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 
-import VlookupOneTitle from '../../images/vlookup_one_title.png';
+import VlookupMultipleExplain from '../../images/vlookup_multiple_explain.png';
 
 export const VlookupButton = ({ state }) => {
 
@@ -80,7 +80,7 @@ export const VlookupButton = ({ state }) => {
   return (
     <div>
       <Box textAlign="center">
-        <img src={VlookupOneTitle} alt="vlookup explanation" />
+        <img src={VlookupMultipleExplain} alt="explain how to use the website" />
       </Box>
       <Box
         textAlign="center"
@@ -101,7 +101,7 @@ export const VlookupButton = ({ state }) => {
           SHOW RESULT
         </Typography>
         <Typography variant="h6" component="h6" textAlign="center">
-          By using our service you accept our <Link>Terms of service</Link> and <Link>Privacy Policy</Link>
+          By using our service, you accept our <Link>Terms of Service</Link> and <Link>Privacy Policy</Link>.
         </Typography>
       </Box>
       {

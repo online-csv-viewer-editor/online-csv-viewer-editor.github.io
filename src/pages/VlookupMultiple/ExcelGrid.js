@@ -7,23 +7,16 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 import { FileInput } from './ExcelParser';
+import { ColorList } from '../../components/Util';
 import './ExcelGrid.css';
 
 export const BaseGrid = ({ state }) => {
   const { stringArrayBase, setStringArrayBase, baseData, setBaseData, selectedColIdBase, setSelectedColIdBase } = state;
 
-  const colorList = [
-    'highlighted-column-one',
-    'highlighted-column-two',
-    'highlighted-column-three',
-    'highlighted-column-four',
-    'highlighted-column-five',
-  ]
-
   const highlightSelectedColumn = (params) => {
     if (selectedColIdBase.has(params.colDef.field)) {
       const index = stringArrayBase.indexOf(params.colDef.field);
-      return colorList[index];
+      return ColorList[index];
     } else return '';
   };
 
@@ -99,18 +92,10 @@ export const MatchGrid = ({ state }) => {
 
   const { stringArrayBase, stringArrayMatch, setStringArrayMatch, baseData, selectedColIdBase, matchData, setMatchData, selectedColIdMatch, setSelectedColIdMatch } = state;
 
-  const colorList = [
-    'highlighted-column-one',
-    'highlighted-column-two',
-    'highlighted-column-three',
-    'highlighted-column-four',
-    'highlighted-column-five',
-  ]
-
   const highlightSelectedColumn = (params) => {
     if (selectedColIdMatch.has(params.colDef.field)) {
       const index = stringArrayMatch.indexOf(params.colDef.field);
-      return colorList[index];
+      return ColorList[index];
     } else return '';
   };
 
@@ -228,10 +213,13 @@ export const MatchGrid = ({ state }) => {
 
 export const ResultGrid = ({ state }) => {
 
-  const { resultData, selectedColIdBase } = state;
+  const { stringArrayBase, resultData, selectedColIdBase } = state;
 
   const highlightSelectedColumn = (params) => {
-    return params.colDef.field === selectedColIdBase ? 'highlighted-column-base' : 'highlighted-column-match-not';
+    if (selectedColIdBase.has(params.colDef.field)) {
+      const index = stringArrayBase.indexOf(params.colDef.field);
+      return ColorList[index];
+    } else return '';
   };
 
   const getColumnDefs = () => {
