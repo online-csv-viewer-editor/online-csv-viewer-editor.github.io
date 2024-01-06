@@ -14,6 +14,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import GifBoxIcon from '@mui/icons-material/GifBox';
 
+import norton from '../images/norton.png'
+
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -45,7 +47,7 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href=""
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -100,19 +102,19 @@ function ResponsiveAppBar() {
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href=""
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: 'Noto Sans Korean, sans-serif',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            LOGO
+            EXCEL.GIF
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -125,7 +127,9 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-
+          <Typography>
+            Scanned by <img alt="Norton trademark icon" src={norton} /> Norton™ Safe Web
+          </Typography>
           { /* 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
@@ -157,7 +161,6 @@ function ResponsiveAppBar() {
             </Menu>
           </Box>
           */}
-
         </Toolbar>
       </Container>
     </AppBar>

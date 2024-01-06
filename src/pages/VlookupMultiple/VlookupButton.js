@@ -5,6 +5,7 @@ import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 
 import VlookupMultipleExplain from '../../images/vlookup_multiple_explain.png';
+import VideoDialog from '../VlookupShared/VideoDialog';
 
 export const VlookupButton = ({ state }) => {
 
@@ -77,10 +78,29 @@ export const VlookupButton = ({ state }) => {
     }
   };
 
+  const [openHelp, setOpenHelp] = useState(false);
+
+  const handleDialogOpen = () => {
+    setOpenHelp(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpenHelp(false);
+  };
+
   return (
     <div>
-      <Box textAlign="center">
+      <Box textAlign="center" onClick={handleDialogOpen}
+        sx={{
+          border: '1px solid #ccc',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          maxWidth: '50%'
+        }}
+        margin="auto"
+      >
         <img src={VlookupMultipleExplain} alt="explain how to use the website" />
+        <VideoDialog open={openHelp} handleClose={handleDialogClose} />
       </Box>
       <Box
         textAlign="center"
@@ -92,10 +112,10 @@ export const VlookupButton = ({ state }) => {
           '&:hover': {
             backgroundColor: '#e0e0e0',
           },
-          maxWidth: '50%'
         }}
         margin="auto"
         onClick={handleClick}
+        mt="15px"
       >
         <Typography variant="h3" component="h3" textAlign="center">
           SHOW RESULT
