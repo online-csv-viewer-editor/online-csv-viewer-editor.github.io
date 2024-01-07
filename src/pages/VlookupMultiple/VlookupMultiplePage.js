@@ -1,6 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
+import { Helmet } from 'react-helmet';
+
+
 import { BaseGrid, MatchGrid, ResultGrid } from './ExcelGrid';
 import { VlookupButton } from './VlookupButton';
 import { exampleBase, exampleMatch } from '../VlookupShared/ExampleData';
@@ -34,28 +37,30 @@ const VlookupMultiplePage = () => {
     setStringArrayMatch
   };
 
-  useEffect(() => {
-      document.title = 'VLOOKUP multiple criteria';
-  }, []);
-
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <VlookupMultipleTitle />
+    <div>
+      <Helmet>
+        <title>vlookup multiple criteria</title>
+        <meta name="description" content= "vlookup multiple criteria (drang and drop only)" />
+      </Helmet>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <VlookupMultipleTitle />
+        </Grid>
+        <Grid item xs={6}>
+          <BaseGrid state={stateVariables} />
+        </Grid>
+        <Grid item xs={6}>
+          <MatchGrid state={stateVariables} />
+        </Grid>
+        <Grid item xs={12}>
+          <VlookupButton state={stateVariables} />
+        </Grid>
+        <Grid item xs={12}>
+          <ResultGrid state={stateVariables} />
+        </Grid>
       </Grid>
-      <Grid item xs={6}>
-        <BaseGrid state={stateVariables} />
-      </Grid>
-      <Grid item xs={6}>
-        <MatchGrid state={stateVariables} />
-      </Grid>
-      <Grid item xs={12}>
-        <VlookupButton state={stateVariables} />
-      </Grid>
-      <Grid item xs={12}>
-        <ResultGrid state={stateVariables} />
-      </Grid>
-    </Grid>
+    </div>
   );
 };
 
