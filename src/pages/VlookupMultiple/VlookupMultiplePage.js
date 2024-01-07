@@ -41,7 +41,7 @@ const VlookupMultiplePage = () => {
     <div>
       <Helmet>
         <title>vlookup multiple criteria</title>
-        <meta name="description" content= "vlookup multiple criteria (drang and drop only)" />
+        <meta name="description" content= "vlookup multiple criteria (drag and drop only)" />
       </Helmet>
       <Grid container spacing={2}>
         <Grid item xs={12}>
