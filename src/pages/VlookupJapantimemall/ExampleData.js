@@ -37,4 +37,16 @@ export const ExampleJapantimemallBase = [
 ];
 
 export const ExampleJapantimemallMatch = [
+  {
+      "옵션ID": "82844419738",
+      "등록상품명": "베이비뵨 바운서 밸런스 소프트 메쉬  그레이 베이지",
+      "등록옵션명": "단일상품",
+      "브랜드": "",
+      "상품명": "",
+      "색상": "",
+      "사이즈": "",
+      "단가": "",
+      "이미지URL": "",
+      "쇼핑몰 URL": "",
+  }
 ];
