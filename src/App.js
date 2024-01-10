@@ -17,7 +17,8 @@ import VlookupJapantimemallPage from './pages/VlookupJapantimemall/VlookupJapant
   // => check
   // 1-3. result 생성. 생성 시 base에서 그 외 필요한 정보 획득
   // => check
-  // 일부 column 명 변경 후 추가
+  // 1-4. 일부 column 명 변경 후 추가
+  // => check
 
 const App = () => {
   return (

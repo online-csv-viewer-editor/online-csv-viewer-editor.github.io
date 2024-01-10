@@ -21,16 +21,19 @@ export const VlookupButton = ({ state }) => {
       for (let i = 0; i < stringArrayBase.length; i++) {
         const baseKey = stringArrayBase[i];
         const matchKey = stringArrayMatch[i];
-        if (base[baseKey] !== match[matchKey]) return false;
+        if (base[baseKey] !== match[matchKey]) { 
+          return false;
+        }
       }
       return true;
     }
 
     const modifyBaseUsingMatch = (base) => {
 
-      const addedKeysToKeep = ["", ""];
+      const addedKeysToKeep = new Set(["구매자", "수취인이름", "우편번호", "수취인 주소", "배송메세지","개인통관번호(PCCC)","통관용수취인전화번호", ""]);
 
-      const keysToKeepFromBase = [ ...selectedColIdBase, ...addedKeysToKeep];
+//      const keysToKeepFromBase = new Set([ ...selectedColIdBase, ...addedKeysToKeep]);
+      const keysToKeepFromBase = new Set([ ...addedKeysToKeep]);
 
       const modifiedBase = Object.fromEntries(
         Object.entries(base).filter(([key]) => keysToKeepFromBase.has(key))
@@ -39,11 +42,16 @@ export const VlookupButton = ({ state }) => {
       const matchingItem = matchData.find(match => checkItemsMatch(base, match));
 
       if (matchingItem) {
-        const keysToRemoveFromMatch = selectedColIdMatch;
-        const modifiedMatch = Object.fromEntries(
-          Object.entries(matchingItem).filter(([key]) => !keysToRemoveFromMatch.has(key))
-        );
-        return { ...modifiedBase, ...modifiedMatch};
+
+//        const keysToRemoveFromMatch = selectedColIdMatch;
+//        const modifiedMatch = Object.fromEntries(
+//          Object.entries(matchingItem).filter(([key]) => !keysToRemoveFromMatch.has(key))
+//        );
+
+        const modifiedMatch = matchingItem;
+
+//        return { ...modifiedBase, ...modifiedMatch};
+        return { ...modifiedMatch, ...modifiedBase };
       } else {
         return { ...modifiedBase };
       }

@@ -14,27 +14,16 @@ const VlookupMultiplePage = () => {
   const [matchData, setMatchData] = useState(ExampleJapantimemallMatch);
   const [resultData, setResultData] = useState([]);
 
-  const [selectedColIdBase, setSelectedColIdBase ] = useState(new Set([
+  const initList = [
     "옵션ID",
     "등록상품명",
     "등록옵션명",
-  ]));
-  const [selectedColIdMatch, setSelectedColIdMatch ] = useState(new Set([
-    "옵션ID",
-    "등록상품명",
-    "등록옵션명",
-  ]));
+  ];
 
-  const [stringArrayBase, setStringArrayBase] = useState([
-    "옵션ID",
-    "등록상품명",
-    "등록옵션명",
-  ]);
-  const [stringArrayMatch, setStringArrayMatch] = useState([
-    "옵션ID",
-    "등록상품명",
-    "등록옵션명",
-  ]);
+  const [selectedColIdBase, setSelectedColIdBase ] = useState(new Set(initList));
+  const [selectedColIdMatch, setSelectedColIdMatch ] = useState(new Set(initList));
+  const [stringArrayBase, setStringArrayBase] = useState(initList);
+  const [stringArrayMatch, setStringArrayMatch] = useState(initList);
 
   const stateVariables = {
     baseData,
