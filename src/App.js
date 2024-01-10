@@ -13,8 +13,9 @@ import VlookupJapantimemallPage from './pages/VlookupJapantimemall/VlookupJapant
   // japantimemall
   // 1-1. base 업로드 시 옵션ID, 이름, 추출해서 match 생성
   // => check
-  // 1=2. match 생성 시 상품 정보 column 추가
+  // 1-2. match 생성 시 상품 정보 column 추가
   // => check
+  // 1-3. 자동 작성
 
 const App = () => {
   return (

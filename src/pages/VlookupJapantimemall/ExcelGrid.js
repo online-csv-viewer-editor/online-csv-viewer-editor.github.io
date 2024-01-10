@@ -168,6 +168,14 @@ export const MatchGrid = ({ state }) => {
       }
     });
 
+    const newKeys = [
+      "브랜드", "상품명 (영문)", "색상", "사이즈", "단가 (￥)", "이미지 URL", "상품 URL"
+    ]
+
+    newKeys.forEach(key => {
+      newJSON[key] = "";
+    })
+
     return newJSON;
   }
 

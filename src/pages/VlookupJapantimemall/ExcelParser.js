@@ -45,6 +45,13 @@ export const FileInput = ({ reset, data, setData, upload, createNew, handleCreat
     }
   };
 
+  const setResult = (result) => {
+    if (result) {
+      console.log(result);
+      setData(result);
+    }
+  }
+
   useEffect(() => {
     async function parsingSheet() {
       if (workbookRead !== null && sheetNames.length !== 0) {
@@ -52,10 +59,7 @@ export const FileInput = ({ reset, data, setData, upload, createNew, handleCreat
           setModalIsOpen(true);
         } else {
           const result = await parseSheet(0, workbookRead, sheetNames);
-          if (result) {
-            console.log(result);
-            setData(result);
-          }
+          setResult(result);
         }
       }
     };
@@ -77,9 +81,7 @@ export const FileInput = ({ reset, data, setData, upload, createNew, handleCreat
   const handleSheetSelect = async (index) => {
     try {
       const result = await parseSheet(index, workbookRead, sheetNames);
-      if (result) {
-        setData(result);
-      }
+      setResult(result);
     } catch (error) {
       console.log("error in handleSheetSelect: , ", error);
     }
