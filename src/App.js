@@ -19,6 +19,8 @@ import VlookupJapantimemallPage from './pages/VlookupJapantimemall/VlookupJapant
   // => check
   // 1-4. 일부 column 명 변경 후 추가
   // => check
+  // 1-5. final grid. headers list 정의. 토대로 json 생성. 대응 되는 key 찾아서 value 가져오기
+  // => check
 
 const App = () => {
   return (
