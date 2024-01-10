@@ -19,14 +19,22 @@ const VlookupMultiplePage = () => {
     "등록상품명",
     "등록옵션명",
   ]));
-  const [selectedColIdMatch, setSelectedColIdMatch ] = useState(new Set(["Product ID"]));
+  const [selectedColIdMatch, setSelectedColIdMatch ] = useState(new Set([
+    "옵션ID",
+    "등록상품명",
+    "등록옵션명",
+  ]));
 
   const [stringArrayBase, setStringArrayBase] = useState([
     "옵션ID",
     "등록상품명",
     "등록옵션명",
   ]);
-  const [stringArrayMatch, setStringArrayMatch] = useState(["Product ID"]);
+  const [stringArrayMatch, setStringArrayMatch] = useState([
+    "옵션ID",
+    "등록상품명",
+    "등록옵션명",
+  ]);
 
   const stateVariables = {
     baseData,

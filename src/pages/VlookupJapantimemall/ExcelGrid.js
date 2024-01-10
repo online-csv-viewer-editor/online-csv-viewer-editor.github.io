@@ -169,7 +169,7 @@ export const MatchGrid = ({ state }) => {
     });
 
     const newKeys = [
-      "브랜드", "상품명 (영문)", "색상", "사이즈", "단가 (￥)", "이미지 URL", "상품 URL"
+      "브랜드", "상품명 (영문)", "색상 (영문)", "사이즈 (영문 또는 숫자)", "단가 (￥)", "이미지 URL", "상품 URL"
     ]
 
     newKeys.forEach(key => {

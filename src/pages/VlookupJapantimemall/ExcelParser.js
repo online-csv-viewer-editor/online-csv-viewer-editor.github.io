@@ -50,7 +50,7 @@ export const FileInput = ({ reset, data, setData, upload, createNew, handleCreat
       console.log(result);
       setData(result);
     }
-  }
+  };
 
   useEffect(() => {
     async function parsingSheet() {

@@ -28,7 +28,10 @@ export const VlookupButton = ({ state }) => {
 
     const modifyBaseUsingMatch = (base) => {
 
-      const keysToKeepFromBase = selectedColIdBase;
+      const addedKeysToKeep = ["", ""];
+
+      const keysToKeepFromBase = [ ...selectedColIdBase, ...addedKeysToKeep];
+
       const modifiedBase = Object.fromEntries(
         Object.entries(base).filter(([key]) => keysToKeepFromBase.has(key))
       );
