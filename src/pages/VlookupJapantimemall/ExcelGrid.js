@@ -300,7 +300,7 @@ export const FinalGrid = ({ state }) => {
 
   const { stringArrayBase, resultData, selectedColIdBase } = state;
 
-  const [ finalData, setfinalData ] = useState([]);
+  const [ finalData, setFinalData ] = useState([]);
 
   const highlightSelectedColumn = (params) => {
     if (selectedColIdBase.has(params.colDef.field)) {
@@ -326,7 +326,7 @@ export const FinalGrid = ({ state }) => {
   const [columnDefs, setColumnDefs] = useState([]);
 
   const finalizeData = () => {
-
+    
     const candidates = [
       "묶음그룹",
       "배송방법",
@@ -362,6 +362,18 @@ export const FinalGrid = ({ state }) => {
       "검수옵션\n(1:기본,2:정밀)",
       "포장옵션\n(2:추가 완충 포장)"
     ];
+
+    const pairs = new Map();
+    pairs.set("", "");
+
+    const obj = {};
+
+    resultData.map((result) => {
+      candidates.forEach(key => {
+        if (result.hasOwnProperty)
+
+      });
+    });
 
   };
 
