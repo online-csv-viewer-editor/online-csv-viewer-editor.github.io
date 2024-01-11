@@ -295,3 +295,111 @@ export const ResultGrid = ({ state }) => {
     </Box>
   );
 };
+
+export const FinalGrid = ({ state }) => {
+
+  const { stringArrayBase, resultData, selectedColIdBase } = state;
+
+  const [ finalData, setfinalData ] = useState([]);
+
+  const highlightSelectedColumn = (params) => {
+    if (selectedColIdBase.has(params.colDef.field)) {
+      const index = stringArrayBase.indexOf(params.colDef.field);
+      return ColorList[index];
+    } else return '';
+  };
+
+  const getColumnDefs = () => {
+      if (resultData.length === 0) {
+          return [];
+      }
+
+      const keys = Object.keys(resultData[0]);
+
+      return keys.map((key) => ({
+          field: key,
+          editable: true,
+          cellClass: highlightSelectedColumn
+      }));
+  };
+
+  const [columnDefs, setColumnDefs] = useState([]);
+
+  const finalizeData = () => {
+
+    const candidates = [
+      "묶음그룹",
+      "배송방법",
+      "대행구분",
+      "성명(한글)",
+      "성명(영어)",
+      "사용안함",
+      "개인통관고유부호",
+      "연락처1",
+      "연락처2",
+      "통관용도",
+      "우편번호",
+      "주소1",
+      "주소2",
+      "배송시요청사항",
+      "주문번호",
+      "브랜드",
+      "상품명",
+      "색상",
+      "사이즈",
+      "수량",
+      "단가 (￥)",
+      "이미지URL",
+      "쇼핑몰 URL",
+      "쉬핑네임",
+      "사용안함",
+      "TRACKING#",
+      "분류",
+      "요청사항",
+      "사용안함",
+      "일본내세금",
+      "일본내 배송비",
+      "검수옵션\n(1:기본,2:정밀)",
+      "포장옵션\n(2:추가 완충 포장)"
+    ];
+
+  };
+
+  useEffect(() => {
+    finalizeData();
+  }, [resultData]);
+
+  useEffect(() => {
+    setColumnDefs(getColumnDefs())
+  }, [finalData]);
+
+  const paginationPageSize = 10;
+  const paginationPageSizeSelector = useMemo(() => {
+    return [10, 25, 50, 100];
+  }, []);
+
+  const handleAddColumnClick = () => {
+    const newColumnDefs = [
+      ...columnDefs,
+      { headerName: 'New Column', field: 'newColumn' }
+    ];
+    setColumnDefs(newColumnDefs);
+  }
+
+  return (
+    <Box>
+      <Box>
+        <FileInput data={resultData} download="Download" />
+      </Box>
+      <Box className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
+        <AgGridReact
+          columnDefs={columnDefs}
+          rowData={resultData}
+          pagination={true}
+          paginationPageSize={paginationPageSize}
+          paginationPageSizeSelector={paginationPageSizeSelector}
+        />
+      </Box>
+    </Box>
+  );
+};

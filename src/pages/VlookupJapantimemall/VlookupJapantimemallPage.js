@@ -4,7 +4,7 @@ import { Grid } from '@mui/material';
 import { Helmet } from 'react-helmet';
 
 
-import { BaseGrid, MatchGrid, ResultGrid } from './ExcelGrid';
+import { BaseGrid, MatchGrid, ResultGrid, FinalGrid } from './ExcelGrid';
 import { VlookupButton } from './VlookupButton';
 import { ExampleJapantimemallBase, ExampleJapantimemallMatch } from './ExampleData';
 import VlookupJapantimemallTitle from './VlookupJapantimemallTitle';
@@ -63,6 +63,9 @@ const VlookupMultiplePage = () => {
         </Grid>
         <Grid item xs={12}>
           <ResultGrid state={stateVariables} />
+        </Grid>
+        <Grid item xs={12}>
+          <FinalGrid state={stateVariables} />
         </Grid>
       </Grid>
     </div>
