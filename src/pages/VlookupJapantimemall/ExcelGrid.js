@@ -58,8 +58,6 @@ export const BaseGrid = ({ state }) => {
     } else {
       addString(colId);
     }
-    console.log(selectedColIdBase);
-    console.log(stringArrayBase);
   }, [selectedColIdBase, setSelectedColIdBase]);
 
   const paginationPageSizeSelector = useMemo(() => {
@@ -169,7 +167,7 @@ export const MatchGrid = ({ state }) => {
     });
 
     const newKeys = [
-      "브랜드", "상품명 (영문)", "색상 (영문)", "사이즈 (영문 또는 숫자)", "단가 (￥)", "이미지 URL", "상품 URL",
+      "브랜드 (영문)", "상품명 (영문)", "색상 (영문)", "사이즈 (영문 또는 숫자)", "단가 (￥)", "이미지 URL", "상품 URL",
       "일본 수취인 성명",
       "분류코드",
       "물류센터 요청 사항",
@@ -310,11 +308,11 @@ export const FinalGrid = ({ state }) => {
   };
 
   const getColumnDefs = () => {
-      if (resultData.length === 0) {
+      if (finalData.length === 0) {
           return [];
       }
 
-      const keys = Object.keys(resultData[0]);
+      const keys = Object.keys(finalData[0]);
 
       return keys.map((key) => ({
           field: key,
@@ -326,37 +324,32 @@ export const FinalGrid = ({ state }) => {
   const [columnDefs, setColumnDefs] = useState([]);
 
   const finalizeData = () => {
+
+    const templateKeys = [
+      "묶음그룹", "배송방법", "대행구분", "성명(한글)", "성명(영어)", "사용안함", "개인통관고유부호", "연락처1", "연락처2",
+      "통관용도", "우편번호", "주소1", "주소2", "배송시요청사항", "주문번호", "브랜드", "상품명", "색상", "사이즈", "수량",
+      "단가 (￥)", "이미지URL", "쇼핑몰 URL", "쉬핑네임", "사용안함", "TRACKING#", "분류", "요청사항", "사용안함", "일본내세금",
+      "일본내 배송비", "검수옵션\n(1:기본,2:정밀)", "포장옵션\n(2:추가 완충 포장)"
+    ];
     
-    const candidates = [
-      "묶음그룹",
-      "배송방법",
-      "대행구분",
-      "성명(한글)",
-      "성명(영어)",
-      "사용안함",
-      "개인통관고유부호",
-      "연락처1",
-      "연락처2",
-      "통관용도",
-      "우편번호",
-      "주소1",
-      "주소2",
-      "배송시요청사항",
-      "주문번호",
-      "브랜드",
-      "상품명",
-      "색상",
-      "사이즈",
-      "수량",
-      "단가 (￥)",
-      "이미지URL",
-      "쇼핑몰 URL",
+    const resultKeys = [
+      "브랜드 (영문)", "상품명 (영문)", "색상 (영문)", "사이즈 (영문 또는 숫자)",
+      "단가 (￥)", "이미지 URL", "상품 URL",
+      "일본 수취인 성명",
+      "분류코드",
+      "물류센터 요청 사항",
+      "일본내세금",
+      "일본내배송비",
+      "검수옵션 (1:기본, 2:정밀)",
+      "포장옵션 (2: 추가 완충, 그 외 비워둠)",
+    ]
+
+    const matchingKeysFromTemplateForResult = [
+      "브랜드", "상품명", "색상", "사이즈",
+      "단가 (￥)", "이미지URL", "쇼핑몰 URL",
       "쉬핑네임",
-      "사용안함",
-      "TRACKING#",
       "분류",
-      "요청사항",
-      "사용안함",
+      "요청사항", 
       "일본내세금",
       "일본내 배송비",
       "검수옵션\n(1:기본,2:정밀)",
@@ -364,17 +357,48 @@ export const FinalGrid = ({ state }) => {
     ];
 
     const pairs = new Map();
-    pairs.set("", "");
 
-    const obj = {};
+    for (let i = 0; i < resultKeys.length; i++) {
+      pairs.set(matchingKeysFromTemplateForResult[i], resultKeys[i]);
+    };
 
+    const coupangKeys = [
+      "수취인이름",
+      "개인통관번호(PCCC)",
+      "우편번호",
+      "수취인 주소",
+      "배송메세지",
+      "통관용수취인전화번호"
+    ];
+
+    const matchingKeysFromTemplateForCoupang = [
+      "성명(한글)",
+      "개인통관고유부호",
+      "우편번호",
+      "주소1",
+      "배송시요청사항",
+      "연락처1"
+    ];
+
+    for (let i = 0; i < coupangKeys.length; i++) {
+      pairs.set(matchingKeysFromTemplateForCoupang[i], coupangKeys[i]);
+    };
+
+    const list = [];
     resultData.map((result) => {
-      candidates.forEach(key => {
-        if (result.hasOwnProperty)
-
+      const obj = {};
+      templateKeys.forEach(key => {
+        const matchingKey = pairs.get(key);
+        if (result.hasOwnProperty(matchingKey)) {
+          obj[key] = result[matchingKey];
+        } else {
+          obj[key] = "";
+        }
       });
+      list.push(obj);
     });
 
+    setFinalData(list);
   };
 
   useEffect(() => {
@@ -401,12 +425,12 @@ export const FinalGrid = ({ state }) => {
   return (
     <Box>
       <Box>
-        <FileInput data={resultData} download="Download" />
+        <FileInput data={finalData} download="Download" />
       </Box>
       <Box className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
           columnDefs={columnDefs}
-          rowData={resultData}
+          rowData={finalData}
           pagination={true}
           paginationPageSize={paginationPageSize}
           paginationPageSizeSelector={paginationPageSizeSelector}
