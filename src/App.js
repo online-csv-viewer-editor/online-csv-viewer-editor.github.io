@@ -11,18 +11,8 @@ import VlookupMultiplePage from './pages/VlookupMultiple/VlookupMultiplePage';
 import VlookupJapantimemallPage from './pages/VlookupJapantimemall/VlookupJapantimemallPage';
 
   // japantimemall
-  // 1-1. base 업로드 시 옵션ID, 이름, 추출해서 match 생성
+  // 1-6. template upload test
   // => check
-  // 1-2. match 생성 시 상품 정보 column 추가
-  // => check
-  // 1-3. result 생성. 생성 시 base에서 그 외 필요한 정보 획득
-  // => check
-  // 1-4. 일부 column 명 변경 후 추가
-  // => check
-  // 1-5. final grid. headers list 정의. 토대로 json 생성. 대응 되는 key 찾아서 value 가져오기
-  // => check
-
-  //
 
 const App = () => {
   return (
