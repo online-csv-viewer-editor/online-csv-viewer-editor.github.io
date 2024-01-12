@@ -99,7 +99,7 @@ export const FileInput = ({ reset, data, setData, upload, createNew, handleCreat
     const worksheet = utils.json_to_sheet(data);
     const workbook = utils.book_new();
     utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    XLSX.writeFile(workbook, 'workbook.xlsx');
+    XLSX.writeFile(workbook, 'workbook.xls', { bookType: 'xls' });
   }
 
   return (

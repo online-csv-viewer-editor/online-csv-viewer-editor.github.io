@@ -13,6 +13,9 @@ import VlookupJapantimemallPage from './pages/VlookupJapantimemall/VlookupJapant
   // japantimemall
   // 1-6. template upload test
   // => check
+  
+  // 1-7. figma (will i use)
+  // => check
 
 const App = () => {
   return (
