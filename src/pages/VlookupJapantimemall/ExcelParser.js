@@ -7,7 +7,7 @@ import { Button, ButtonGroup } from '@mui/material';
 
 import { SheetModal } from '../VlookupShared/SheetModal'
 
-export const FileInput = ({ reset, data, setData, upload, createNew, handleCreateNewClick, addColumn, handleAddColumnClick, download }) => {
+export const FileInput = ({ reset, data, setData, upload, createNew, handleCreateNewClick, addColumn, handleAddColumnClick, download, sheetName }) => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [sheetNames, setSheetNames] = useState([]);
@@ -98,8 +98,8 @@ export const FileInput = ({ reset, data, setData, upload, createNew, handleCreat
     const utils = XLSX.utils;
     const worksheet = utils.json_to_sheet(data);
     const workbook = utils.book_new();
-    utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    XLSX.writeFile(workbook, 'workbook.xls', { bookType: 'xls' });
+    utils.book_append_sheet(workbook, worksheet, sheetName);
+    XLSX.writeFile(workbook, `${sheetName}.xls`, { bookType: 'xls' });
   }
 
   return (

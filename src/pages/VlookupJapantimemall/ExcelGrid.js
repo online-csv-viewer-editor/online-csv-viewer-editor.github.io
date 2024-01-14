@@ -218,7 +218,7 @@ export const MatchGrid = ({ state }) => {
   return (
     <div>
       <div>
-        <FileInput reset={resetMatchSelected} data={matchData} setData={setMatchData} upload="Upload Match" createNew="Create New" handleCreateNewClick={handleCreateNewClick} download="Download" />
+        <FileInput reset={resetMatchSelected} data={matchData} setData={setMatchData} upload="Upload Match" createNew="Create New" handleCreateNewClick={handleCreateNewClick} download="Download" sheetName="상품정보" />
       </div>
       <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
@@ -279,7 +279,7 @@ export const ResultGrid = ({ state }) => {
   return (
     <Box>
       <Box>
-        <FileInput data={resultData} download="Download" />
+        <FileInput data={resultData} download="Download" sheetName="통합정보" />
       </Box>
       <Box className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
@@ -326,9 +326,9 @@ export const FinalGrid = ({ state }) => {
   const finalizeData = () => {
 
     const templateKeys = [
-      "묶음그룹", "배송방법", "대행구분", "성명(한글)", "성명(영어)", "사용안함", "개인통관고유부호", "연락처1", "연락처2",
+      "묶음그룹", "배송방법", "대행구분", "성명(한글)", "성명(영어)", "사용안함 1", "개인통관고유부호", "연락처1", "연락처2",
       "통관용도", "우편번호", "주소1", "주소2", "배송시요청사항", "주문번호", "브랜드", "상품명", "색상", "사이즈", "수량",
-      "단가 (￥)", "이미지URL", "쇼핑몰 URL", "쉬핑네임", "사용안함 2", "TRACKING#", "분류", "요청사항", "사용안함", "일본내세금",
+      "단가 (￥)", "이미지URL", "쇼핑몰 URL", "쉬핑네임", "사용안함 2", "TRACKING#", "분류", "요청사항", "사용안함 3", "일본내세금",
       "일본내 배송비", "검수옵션\n(1:기본,2:정밀)", "포장옵션\n(2:추가 완충 포장)"
     ];
     
@@ -425,7 +425,7 @@ export const FinalGrid = ({ state }) => {
   return (
     <Box>
       <Box>
-        <FileInput data={finalData} download="Download" />
+        <FileInput data={finalData} download="Download" sheetName="접수" />
       </Box>
       <Box className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
