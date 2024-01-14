@@ -6,7 +6,7 @@ function VlookupJapantimemallTitle() {
   return (
     <div>
       <Typography variant="h3" component="h2" textAlign="center">
-        배송 대행 신청서 자동 작성 프로그램
+        배송 대행 신청서 자동 작성 프로그램 - 모바일
       </Typography>
       <Typography variant="h4" component="h3" textAlign="center">
         <strong>재팬타임몰 전용</strong>
