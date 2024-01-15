@@ -1,6 +1,7 @@
 
 import * as React from 'react';
 import Box from '@mui/material/Box';
+import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 
@@ -39,27 +40,30 @@ function Terms() {
 
 export default function Footer() {
   return (
-        <Box
-          component="footer"
-          sx={{
-            py: 1,
-            px: 1,
-            mt: 'auto',
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[200]
-                : theme.palette.grey[800],
-          }}
-          display={"flex"}
-          justifyContent={"flex-end"}
-        >
-          <Box maxWidth="sm">
-            <Box display={"flex"}>
-              <Terms />
-              <Privacy />
-            </Box>
-            <Copyright />
+    <Grid container>
+      <Grid item xs={12} md={10}
+        component="footer"
+        sx={{
+          py: 1,
+          px: 1,
+          mt: 'auto',
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'light'
+              ? theme.palette.grey[200]
+              : theme.palette.grey[800],
+          margin: 'auto'
+        }}
+        display="flex"
+        justifyContent="flex-end"
+      >
+        <Box maxWidth="sm">
+          <Box display={"flex"}>
+            <Terms />
+            <Privacy />
           </Box>
+          <Copyright />
         </Box>
+      </Grid>
+    </Grid>
   );
 }

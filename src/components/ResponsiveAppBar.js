@@ -39,7 +39,8 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static"
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <GifBoxIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
