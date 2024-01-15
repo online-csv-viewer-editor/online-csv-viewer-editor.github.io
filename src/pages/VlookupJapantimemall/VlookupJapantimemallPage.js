@@ -42,31 +42,39 @@ const VlookupMultiplePage = () => {
     setStringArrayMatch
   };
 
+  const MyGrid = ({ children }) => {
+    return (
+      <Grid item xs={12} md={10}>
+        {children}
+      </Grid>
+    );
+  };
+
   return (
     <div>
       <Helmet>
         <title>재팬타임몰 배송 대행 신청서 자동 작성 - 쿠팡 전용</title>
         <meta name="description" content= "재팬타임몰 배송 대행 신청서 자동 작성 - 쿠팡 전용" />
       </Helmet>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
+      <Grid container justifyContent="center" spacing={2}>
+        <MyGrid>
           <VlookupJapantimemallTitle />
-        </Grid>
-        <Grid item xs={6}>
+        </MyGrid>
+        <MyGrid>
           <BaseGrid state={stateVariables} />
-        </Grid>
-        <Grid item xs={6}>
+        </MyGrid>
+        <MyGrid>
           <MatchGrid state={stateVariables} />
-        </Grid>
-        <Grid item xs={12}>
+        </MyGrid>
+        <MyGrid>
           <VlookupButton state={stateVariables} />
-        </Grid>
-        <Grid item xs={12}>
+        </MyGrid>
+        <MyGrid>
           <ResultGrid state={stateVariables} />
-        </Grid>
-        <Grid item xs={12}>
+        </MyGrid>
+        <MyGrid>
           <FinalGrid state={stateVariables} />
-        </Grid>
+        </MyGrid>
       </Grid>
     </div>
   );
