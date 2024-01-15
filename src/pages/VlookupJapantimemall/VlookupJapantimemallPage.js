@@ -56,7 +56,7 @@ const VlookupMultiplePage = () => {
         <title>재팬타임몰 배송 대행 신청서 자동 작성 - 쿠팡 전용</title>
         <meta name="description" content= "재팬타임몰 배송 대행 신청서 자동 작성 - 쿠팡 전용" />
       </Helmet>
-      <Grid container justifyContent="center" spacing={2}>
+      <Grid container justifyContent="center" spacing={2} mt={1}>
         <MyGrid>
           <VlookupJapantimemallTitle />
         </MyGrid>

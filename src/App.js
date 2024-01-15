@@ -20,6 +20,9 @@ import VlookupJapantimemallPage from './pages/VlookupJapantimemall/VlookupJapant
   // 1-8. one page at a time
   // => check
 
+  // 1-9. 버튼 수정. RESULT 버튼 수정. ResultGrid 안보이게 하기.
+  // => CHECK
+
 const App = () => {
   return (
     <Router>

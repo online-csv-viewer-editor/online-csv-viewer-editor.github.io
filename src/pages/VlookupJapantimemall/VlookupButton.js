@@ -7,6 +7,8 @@ import Alert from '@mui/material/Alert';
 import VlookupMultipleExplain from '../../images/vlookup_multiple_explain.png';
 import VideoDialog from '../VlookupShared/VideoDialog';
 
+import { VlookupButtonTitle } from './Translations';
+
 export const VlookupButton = ({ state }) => {
 
   const { setResultData, matchData, baseData, selectedColIdBase, selectedColIdMatch, stringArrayBase, stringArrayMatch } = state;
@@ -14,7 +16,7 @@ export const VlookupButton = ({ state }) => {
   const [error, setError] = useState("");
 
   const handleClick = () => {
-
+    
     const keysArray = Object.keys(baseData);
 
     function checkItemsMatch(base, match) {
@@ -130,7 +132,7 @@ export const VlookupButton = ({ state }) => {
         mt="15px"
       >
         <Typography variant="h3" component="h3" textAlign="center">
-          SHOW RESULT
+          {VlookupButtonTitle}
         </Typography>
         <Typography variant="h6" component="h6" textAlign="center">
           By using our service, you accept our <Link>Terms of Service</Link> and <Link>Privacy Policy</Link>.

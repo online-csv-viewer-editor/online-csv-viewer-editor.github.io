@@ -10,6 +10,8 @@ import { FileInput } from './ExcelParser';
 import { ColorList } from '../../components/Util';
 import './ExcelGrid.css';
 
+import { UploadBaseButtonLabel, UploadMatchButtonLabel, CreateNewMatchButtonLabel, DownloadMatchButtonLabel, DownloadFinalButtonLabel } from './Translations';
+
 export const BaseGrid = ({ state }) => {
   const { stringArrayBase, setStringArrayBase, baseData, setBaseData, selectedColIdBase, setSelectedColIdBase } = state;
 
@@ -80,7 +82,7 @@ export const BaseGrid = ({ state }) => {
   return (
     <div>
       <div>
-        <FileInput reset={resetBaseSelected} setData={setBaseData} upload="UPLOAD base" />
+        <FileInput reset={resetBaseSelected} setData={setBaseData} upload={UploadBaseButtonLabel} />
       </div>
       <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
@@ -218,7 +220,7 @@ export const MatchGrid = ({ state }) => {
   return (
     <div>
       <div>
-        <FileInput reset={resetMatchSelected} data={matchData} setData={setMatchData} upload="Upload Match" createNew="Create New" handleCreateNewClick={handleCreateNewClick} download="Download" sheetName="상품정보" />
+        <FileInput reset={resetMatchSelected} data={matchData} setData={setMatchData} upload={UploadMatchButtonLabel} createNew={CreateNewMatchButtonLabel} handleCreateNewClick={handleCreateNewClick} download={DownloadMatchButtonLabel} sheetName="상품정보" />
       </div>
       <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
@@ -277,20 +279,8 @@ export const ResultGrid = ({ state }) => {
   }
 
   return (
-    <Box>
-      <Box>
-        <FileInput data={resultData} download="Download" sheetName="통합정보" />
-      </Box>
-      <Box className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
-        <AgGridReact
-          columnDefs={columnDefs}
-          rowData={resultData}
-          pagination={true}
-          paginationPageSize={paginationPageSize}
-          paginationPageSizeSelector={paginationPageSizeSelector}
-        />
-      </Box>
-    </Box>
+    <>
+    </>
   );
 };
 
@@ -425,7 +415,7 @@ export const FinalGrid = ({ state }) => {
   return (
     <Box>
       <Box>
-        <FileInput data={finalData} download="Download" sheetName="접수" />
+        <FileInput data={finalData} download={DownloadFinalButtonLabel} sheetName="접수" />
       </Box>
       <Box className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
