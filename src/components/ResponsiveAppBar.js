@@ -13,15 +13,23 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import GifBoxIcon from '@mui/icons-material/GifBox';
+import { Link } from 'react-router-dom';
 
 import norton from '../images/norton.png'
 
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['VLOOKUP (single)', 'VLOOKUP (multi)', '재팬타임몰', '짐패스'];
+const urls = ['/vlookup/single', '/vlookup/multiple', '/japantimemall', '/japantimemall'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const linkStyle = {
+    textDecoration: 'none', // Removes the underline
+    color: 'inherit', // Keeps the default text color
+  };
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -34,7 +42,8 @@ function ResponsiveAppBar() {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (event) => {
+    console.log('clicked value: ', event.currentTarget.getAttribute('data-value'));
     setAnchorElUser(null);
   };
 
@@ -122,7 +131,7 @@ function ResponsiveAppBar() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={handleOpenUserMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -132,13 +141,8 @@ function ResponsiveAppBar() {
           <Typography>
             Scanned by <img alt="Norton trademark icon" src={norton} /> Norton™ Safe Web
           </Typography>
-          { /* 
+
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -155,14 +159,17 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {settings.map((setting, index) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu} data-value={setting}>
+                  <Typography textAlign="center">
+                    <Link to={urls[index]} style={linkStyle}>
+                      {setting}
+                    </Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          */}
         </Toolbar>
       </Container>
     </AppBar>
