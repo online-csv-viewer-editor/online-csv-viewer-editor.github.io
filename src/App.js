@@ -26,7 +26,8 @@ import VlookupJapantimemallPage from './pages/VlookupJapantimemall/VlookupJapant
   // 1-10. PRODUCTS LIST, 네이버, 재팬타임몰, 짐패스
   // => CHECK
 
-  // 1-11.
+  // 1-11. HOW-TO VIDEO
+  // => CHECK
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/vlookup/single" element={<VlookupPage />} />
         <Route path="/vlookup/multiple" element={<VlookupMultiplePage />} />
         <Route path="/japantimemall" element={<VlookupJapantimemallPage />} />
+        <Route path="" element={<VlookupMultiplePage />} />
       </Routes>
       <Footer />
     </Router>
