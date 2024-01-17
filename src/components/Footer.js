@@ -26,7 +26,7 @@ function Privacy() {
       </Link>
     </Typography>
   );
-};
+}
 
 function Terms() {
   return (
@@ -36,7 +36,7 @@ function Terms() {
       </Link>
     </Typography>
   );
-};
+}
 
 export default function Footer() {
   return (

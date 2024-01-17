@@ -57,7 +57,7 @@ export const FileInput = ({ reset, data, setData, upload, createNew, handleCreat
           }
         }
       }
-    };
+    }
     parsingSheet();
   }, [workbookRead, sheetNames, setData]);
 

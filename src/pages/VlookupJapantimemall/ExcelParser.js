@@ -7,20 +7,22 @@ import { Button, ButtonGroup } from '@mui/material';
 
 import { SheetModal } from '../VlookupShared/SheetModal'
 
-export const FileInput = ({ reset, data, setData, upload, createNew, handleCreateNewClick, addColumn, handleAddColumnClick, download, sheetName }) => {
+export const FileInput = ({ resetSelected, data, setData, upload, createNew, handleCreateNewClick, addColumn, handleAddColumnClick, download, sheetName }) => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [sheetNames, setSheetNames] = useState([]);
   const [workbookRead, setWorkbookRead] = useState(null);
 
   const readWorkbookAsync = (file) => {
+    console.log("readWorkbookAsync called");
+
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
 
       reader.onload = (event) => {
         const data = new Uint8Array(event.target.result);
-        const workbookRead = XLSX.read(data, { type: 'array' });
-        resolve(workbookRead);
+        const workbook = XLSX.read(data, { type: 'array' });
+        resolve(workbook);
       };
 
       reader.onerror = (event) => {
@@ -35,10 +37,11 @@ export const FileInput = ({ reset, data, setData, upload, createNew, handleCreat
     if (file) {
       try {
         const workbook = await readWorkbookAsync(file);
+        console.log(workbook);
         const workbookSheetNames = workbook.SheetNames.map((name) => ({ name }));
+        console.log(workbookSheetNames);
         setSheetNames(workbookSheetNames);
         setWorkbookRead(workbook);
-        reset();
       } catch (error) {
         console.error('Error reading the file: ', error);
       }
@@ -49,22 +52,34 @@ export const FileInput = ({ reset, data, setData, upload, createNew, handleCreat
     if (result) {
       console.log(result);
       setData(result);
+      resetSelected();
     }
   };
 
   useEffect(() => {
-    async function parsingSheet() {
-      if (workbookRead !== null && sheetNames.length !== 0) {
-        if (sheetNames.length > 1) {
-          setModalIsOpen(true);
-        } else {
-          const result = await parseSheet(0, workbookRead, sheetNames);
-          setResult(result);
+    console.log("parsingSheet called. Download SheetName: ", sheetName);
+    console.log("parsingSheet called. workbookRead: ", workbookRead);
+    console.log("parsingSheet called. sheetNames: ", sheetNames);
+
+    const parsingSheet = async () => {
+      try {
+        if (workbookRead !== null && sheetNames.length !== 0) {
+          console.log("inside parsingSheet loop");
+          if (sheetNames.length > 1) {
+            setModalIsOpen(true);
+          } else {
+            const sheetDefaultIndex = 0;
+            const result = await parseSheet(sheetDefaultIndex, workbookRead, sheetNames);
+            setResult(result);
+          }
         }
+      } catch (error) {
+        console.error('Error parsing sheet data: ', error);
       }
     };
+
     parsingSheet();
-  }, [workbookRead, sheetNames, setData]);
+  }, [workbookRead, sheetNames]);
 
   const parseSheet = async (index, workbook, workbookSheetNames) => {
     return new Promise((resolve, reject) => {

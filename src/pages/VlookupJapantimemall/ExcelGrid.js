@@ -82,7 +82,7 @@ export const BaseGrid = ({ state }) => {
   return (
     <div>
       <div>
-        <FileInput reset={resetBaseSelected} setData={setBaseData} upload={UploadBaseButtonLabel} />
+        <FileInput resetSelected={resetBaseSelected} setData={setBaseData} upload={UploadBaseButtonLabel} sheetName="주문정보" />
       </div>
       <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
@@ -163,7 +163,7 @@ export const MatchGrid = ({ state }) => {
     const newJSON = {};
 
     keys.forEach(key => {
-      if (originalJSON.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(originalJSON, key)) {
         newJSON[key] = originalJSON[key];
       }
     });
@@ -213,14 +213,22 @@ export const MatchGrid = ({ state }) => {
   }
 
   const resetMatchSelected = () => {
-    setSelectedColIdMatch(new Set());
-    setStringArrayMatch([]);
+    setSelectedColIdMatch(new Set([
+      "옵션ID",
+      "등록상품명",
+      "등록옵션명"
+    ]));
+    setStringArrayMatch([
+      "옵션ID",
+      "등록상품명",
+      "등록옵션명"
+    ]);
   };
 
   return (
     <div>
       <div>
-        <FileInput reset={resetMatchSelected} data={matchData} setData={setMatchData} upload={UploadMatchButtonLabel} createNew={CreateNewMatchButtonLabel} handleCreateNewClick={handleCreateNewClick} download={DownloadMatchButtonLabel} sheetName="상품정보" />
+        <FileInput resetSelected={resetMatchSelected} data={matchData} setData={setMatchData} upload={UploadMatchButtonLabel} createNew={CreateNewMatchButtonLabel} handleCreateNewClick={handleCreateNewClick} download={DownloadMatchButtonLabel} sheetName="상품정보" />
       </div>
       <div className="ag-theme-alpine" style={{ height: 450, width: '100%' }}>
         <AgGridReact
@@ -350,7 +358,7 @@ export const FinalGrid = ({ state }) => {
 
     for (let i = 0; i < resultKeys.length; i++) {
       pairs.set(matchingKeysFromTemplateForResult[i], resultKeys[i]);
-    };
+    }
 
     const coupangKeys = [
       "수취인이름",
@@ -372,14 +380,14 @@ export const FinalGrid = ({ state }) => {
 
     for (let i = 0; i < coupangKeys.length; i++) {
       pairs.set(matchingKeysFromTemplateForCoupang[i], coupangKeys[i]);
-    };
+    }
 
     const list = [];
     resultData.map((result) => {
       const obj = {};
       templateKeys.forEach(key => {
         const matchingKey = pairs.get(key);
-        if (result.hasOwnProperty(matchingKey)) {
+        if (Object.prototype.hasOwnProperty.call(result, matchingKey)) {
           obj[key] = result[matchingKey];
         } else {
           obj[key] = "";

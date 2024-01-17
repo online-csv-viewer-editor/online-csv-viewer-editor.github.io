@@ -11,22 +11,7 @@ import VlookupMultiplePage from './pages/VlookupMultiple/VlookupMultiplePage';
 import VlookupJapantimemallPage from './pages/VlookupJapantimemall/VlookupJapantimemallPage';
 
   // japantimemall
-  // 1-6. template upload test
-  // => check
-  
-  // 1-7. figma (will i use)
-  // => check
-
-  // 1-8. one page at a time
-  // => check
-
-  // 1-9. 버튼 수정. RESULT 버튼 수정. ResultGrid 안보이게 하기.
-  // => CHECK
-
-  // 1-10. PRODUCTS LIST
-  // => CHECK
-
-  // 1-11. HOWTO
+  // 1-11. HOWTO BUTTON.
   // => CHECK
 
 const App = () => {
@@ -48,5 +33,4 @@ export default App;
 
   // "시작했으면 끝을 내는 습관" => 1년 허탕도 가능
 
-  // 1차 목표: google ad로 사용하는지 확인
   // 2차 목표: japantimemall 사용 용도 등 custom target에 제공 - 1월 16일. 오픈 톡방. 온꿈사. is 가치? => feedback.

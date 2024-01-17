@@ -102,7 +102,7 @@ export const MatchGrid = ({ state }) => {
   const handleCreateNewClick = () => {
     const uniqueValuesSet = new Set();
     for (const item of baseData) {
-      if (item.hasOwnProperty(selectedColIdBase)) {
+      if (Object.prototype.hasOwnProperty.call(item, selectedColIdBase)) {
         uniqueValuesSet.add(item[selectedColIdBase])
       }
     }

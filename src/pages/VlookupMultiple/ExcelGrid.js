@@ -153,7 +153,7 @@ export const MatchGrid = ({ state }) => {
     const newJSON = {};
 
     keys.forEach(key => {
-      if (originalJSON.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(originalJSON, key)) {
         newJSON[key] = originalJSON[key];
       }
     });
