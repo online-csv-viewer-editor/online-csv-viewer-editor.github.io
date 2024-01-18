@@ -1,5 +1,12 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/excevttr/public_html/
-    - /bin/cp -R * $DEPLOYPATH
+    - export DEPLOYPATH=/home/harang90/public_html/
+    - /bin/cp -R static $DEPLOYPATH
+    - /bin/cp .htaccess $DEPLOYPATH
+    - /bin/cp asset-manifest.json $DEPLOYPATH
+    - /bin/cp favicon.ico $DEPLOYPATH
+    - /bin/cp Gensw_0720e65ca89247d.html $DEPLOYPATH
+    - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp manifest.json $DEPLOYPATH
+    - /bin/cp README.md $DEPLOYPATH
