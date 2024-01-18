@@ -354,6 +354,8 @@ export const FinalGrid = ({ state }) => {
       "포장옵션\n(2:추가 완충 포장)"
     ];
 
+    //const createMatchingKeyPairsWithTemplateAndResult
+
     const pairs = new Map();
 
     for (let i = 0; i < resultKeys.length; i++) {
@@ -378,17 +380,32 @@ export const FinalGrid = ({ state }) => {
       "연락처1"
     ];
 
+    //const createMatchingKeyPairsWithTemplateAndCoupang
+
     for (let i = 0; i < coupangKeys.length; i++) {
       pairs.set(matchingKeysFromTemplateForCoupang[i], coupangKeys[i]);
     }
 
+    // const createFinalFromResult
+
+    const defaultValue = { 
+      // "배송방법", "대행구분"
+      //""
+    };
+
+    // EX "key" : "defaultValue"
+
     const list = [];
-    resultData.map((result) => {
+    resultData.map((result, index) => {
       const obj = {};
       templateKeys.forEach(key => {
         const matchingKey = pairs.get(key);
         if (Object.prototype.hasOwnProperty.call(result, matchingKey)) {
           obj[key] = result[matchingKey];
+//        } else if (Object.prototype.hasOwnP) {
+//          obj[key] = "";
+        } else if {
+          // key matches "묶음그룹" index
         } else {
           obj[key] = "";
         }
