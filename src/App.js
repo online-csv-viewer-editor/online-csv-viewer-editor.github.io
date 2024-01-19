@@ -34,6 +34,7 @@ export default App;
   // "시작했으면 끝을 내는 습관" => 1년 허탕도 가능
 
   // 2차 목표: japantimemall 사용 용도 등 custom target에 제공 - 1월 20일. 오픈 톡방. 온꿈사. is 가치? => feedback.
-  // 1월 31일 목표: 영어용으로 shopee 제공
+  // => 한글 영어 romanizer 까지 => 2차는 주문번호.
+  // 1월 31일 목표: 영어용으로 shopee 제공. 수요 테스트.
 
-  // 3차 목표: 상세페이지 작성 익숙.
+  // 3차 목표: global service 수요 조사.

@@ -388,24 +388,29 @@ export const FinalGrid = ({ state }) => {
 
     // const createFinalFromResult
 
-    const defaultValue = { 
-      // "배송방법", "대행구분"
-      //""
-    };
+    const defaultKeyValuePairs = new Map(); 
+    defaultKeyValuePairs.set('배송방법', '항공특송');
+    defaultKeyValuePairs.set('대행구분', '배송');
+    defaultKeyValuePairs.set('통관용도', '개인');
+    defaultKeyValuePairs.set('수량', '1');
 
-    // EX "key" : "defaultValue"
+    console.log(defaultKeyValuePairs);
 
     const list = [];
     resultData.map((result, index) => {
       const obj = {};
       templateKeys.forEach(key => {
+        console.log("key: ", key);
+
         const matchingKey = pairs.get(key);
         if (Object.prototype.hasOwnProperty.call(result, matchingKey)) {
           obj[key] = result[matchingKey];
-//        } else if (Object.prototype.hasOwnP) {
-//          obj[key] = "";
-        } else if {
-          // key matches "묶음그룹" index
+        } else if (key === '묶음그룹') {
+          obj[key] = (index+1).toString();
+        } else if (key === '연락처2') {
+          obj[key] = obj['연락처1'];
+        } else if (defaultKeyValuePairs.has(key)) {
+          obj[key] = defaultKeyValuePairs.get(key);
         } else {
           obj[key] = "";
         }
