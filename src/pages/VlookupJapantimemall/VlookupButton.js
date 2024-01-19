@@ -4,6 +4,10 @@ import { Box, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import NativeSelect from '@mui/material/NativeSelect';
+
 import VlookupMultipleExplain from '../../images/vlookup_multiple_explain.png';
 import VideoDialog from '../VlookupShared/VideoDialog';
 
@@ -102,6 +106,36 @@ export const VlookupButton = ({ state }) => {
     setOpenHelp(false);
   };
 
+  const DefaultValueSelect = () => {
+
+    const DeliveryFormControl = () => {
+      
+      return (
+        <FormControl>
+          <InputLabel variant="standard" htmlFor="uncontrolled-native-배송방법">
+            배송방법
+          </InputLabel>
+          <NativeSelect
+            defaultValue={30}
+            inputProps={{
+              name: '배송방법',
+              id: 'uncontrolled-native-배송방법',
+            }}
+          >
+            <option value={'airplane'}>항공특송</option>
+            <option value={'ship'}>해운특송</option>
+          </NativeSelect>
+        </FormControl>
+      );
+    };
+
+    return (
+      <Box sx={{ minWidth: 120 }}>
+        <DeliveryFormControl />
+      </Box>
+    );
+  }
+
   return (
     <div>
       <Box textAlign="center" onClick={handleDialogOpen}
@@ -153,6 +187,7 @@ export const VlookupButton = ({ state }) => {
           </Box>
         : <></>
       }
+      <DefaultValueSelect />
     </div>
   );
 };
