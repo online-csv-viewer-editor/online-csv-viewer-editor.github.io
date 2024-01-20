@@ -25,6 +25,8 @@ const VlookupMultiplePage = () => {
   const [stringArrayBase, setStringArrayBase] = useState(initList);
   const [stringArrayMatch, setStringArrayMatch] = useState(initList);
 
+  const [defaultKeyValuePairs, setDefaultKeyValuePairs] = useState(new Map());
+
   const stateVariables = {
     baseData,
     setBaseData,
@@ -39,7 +41,9 @@ const VlookupMultiplePage = () => {
     stringArrayBase,
     setStringArrayBase,
     stringArrayMatch,
-    setStringArrayMatch
+    setStringArrayMatch,
+    defaultKeyValuePairs,
+    setDefaultKeyValuePairs
   };
 
   const MyGrid = ({ children }) => {
@@ -71,6 +75,9 @@ const VlookupMultiplePage = () => {
         </MyGrid>
         <MyGrid>
           <ResultGrid state={stateVariables} />
+        </MyGrid>
+        <MyGrid>
+          <DefaultValueSelect />
         </MyGrid>
         <MyGrid>
           <FinalGrid state={stateVariables} />

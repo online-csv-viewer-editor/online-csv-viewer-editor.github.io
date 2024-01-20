@@ -109,14 +109,19 @@ export const VlookupButton = ({ state }) => {
   const DefaultValueSelect = () => {
 
     const DeliveryFormControl = () => {
-      
+
+      const handleSelectChange = (event) => {
+
+      };
+
       return (
         <FormControl>
           <InputLabel variant="standard" htmlFor="uncontrolled-native-배송방법">
             배송방법
           </InputLabel>
           <NativeSelect
-            defaultValue={30}
+            defaultValue={'ship'}
+            onChange={}
             inputProps={{
               name: '배송방법',
               id: 'uncontrolled-native-배송방법',
