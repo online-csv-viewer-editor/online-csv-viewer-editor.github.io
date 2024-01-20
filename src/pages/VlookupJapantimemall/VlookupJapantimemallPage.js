@@ -8,6 +8,7 @@ import { BaseGrid, MatchGrid, ResultGrid, FinalGrid } from './ExcelGrid';
 import { VlookupButton } from './VlookupButton';
 import { ExampleJapantimemallBase, ExampleJapantimemallMatch } from './ExampleData';
 import VlookupJapantimemallTitle from './VlookupJapantimemallTitle';
+import DefaultValueSelect from './DefaultValueSelect';
 
 const VlookupMultiplePage = () => {
   const [baseData, setBaseData] = useState(ExampleJapantimemallBase);
@@ -25,7 +26,13 @@ const VlookupMultiplePage = () => {
   const [stringArrayBase, setStringArrayBase] = useState(initList);
   const [stringArrayMatch, setStringArrayMatch] = useState(initList);
 
-  const [defaultKeyValuePairs, setDefaultKeyValuePairs] = useState(new Map());
+  const initialDefaultKeyValuePairs = new Map(); 
+  initialDefaultKeyValuePairs.set('배송방법', '항공특송');
+  initialDefaultKeyValuePairs.set('대행구분', '배송');
+  initialDefaultKeyValuePairs.set('통관용도', '개인');
+  initialDefaultKeyValuePairs.set('수량', '1');
+
+  const [defaultKeyValuePairs, setDefaultKeyValuePairs] = useState(initialDefaultKeyValuePairs);
 
   const stateVariables = {
     baseData,
@@ -77,7 +84,7 @@ const VlookupMultiplePage = () => {
           <ResultGrid state={stateVariables} />
         </MyGrid>
         <MyGrid>
-          <DefaultValueSelect />
+          <DefaultValueSelect state={stateVariables} />
         </MyGrid>
         <MyGrid>
           <FinalGrid state={stateVariables} />

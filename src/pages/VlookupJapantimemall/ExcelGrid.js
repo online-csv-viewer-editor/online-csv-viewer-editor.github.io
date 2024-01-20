@@ -294,7 +294,7 @@ export const ResultGrid = ({ state }) => {
 
 export const FinalGrid = ({ state }) => {
 
-  const { stringArrayBase, resultData, selectedColIdBase } = state;
+  const { stringArrayBase, resultData, selectedColIdBase, defaultKeyValuePairs } = state;
 
   const [ finalData, setFinalData ] = useState([]);
 
@@ -387,14 +387,6 @@ export const FinalGrid = ({ state }) => {
     }
 
     // const createFinalFromResult
-
-    const defaultKeyValuePairs = new Map(); 
-    defaultKeyValuePairs.set('배송방법', '항공특송');
-    defaultKeyValuePairs.set('대행구분', '배송');
-    defaultKeyValuePairs.set('통관용도', '개인');
-    defaultKeyValuePairs.set('수량', '1');
-
-    console.log(defaultKeyValuePairs);
 
     const list = [];
     resultData.map((result, index) => {
