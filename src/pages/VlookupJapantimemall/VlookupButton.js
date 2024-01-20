@@ -4,10 +4,6 @@ import { Box, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import NativeSelect from '@mui/material/NativeSelect';
-
 import VlookupMultipleExplain from '../../images/vlookup_multiple_explain.png';
 import VideoDialog from '../VlookupShared/VideoDialog';
 
