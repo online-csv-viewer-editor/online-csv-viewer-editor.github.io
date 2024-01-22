@@ -10,8 +10,17 @@ import VlookupPage from './pages/VlookupSingle/VlookupPage';
 import VlookupMultiplePage from './pages/VlookupMultiple/VlookupMultiplePage';
 import VlookupJapantimemallPage from './pages/VlookupJapantimemall/VlookupJapantimemallPage';
 
-  // japantimemall
-  // 1-2. 배송 유형, 대행, 통관 용도 drop down
+  // 1-1-1. 사전 예약 페이지 기획
+  // 잡아라의 이런 분들께 추천해요
+  // => check
+
+  // 1-1-1-1. 큰 틀 잡기
+  // => check
+
+  // 1-1-1-2. 서비스 소개
+  // => check
+
+  // 1-1-2. remainder: 묶음그룹 (숫자 자동), 배송 방법, 대행 구분 drop down
   // => check
 
 const App = () => {
@@ -33,4 +42,4 @@ export default App;
 
   // "시작했으면 끝을 내는 습관" => 1년 허탕도 가능
 
-  // 2차 목표: japantimemall 사용 용도 등 custom target에 제공 - 1월 31일. 오픈 톡방. 온꿈사. is 가치? => feedback.
+  // 1월 30일. 랜딩 페이지 및 1명에게 DB 획득. (안되고 있다 => 교육 신청)
